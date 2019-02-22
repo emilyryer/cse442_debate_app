@@ -2,6 +2,7 @@
 <meta charset=UTF8>
 <html>
   <head>
+   {% block head %}
     <!-- LOCAL BOOTSTRAP FILES:
     REMOVE once boostrap is added into Django directly -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,13 +15,14 @@
   <!-- This file only CSS -->
   <style>
     body{
-      background-color: #FEFEFE;
+      background-color: #F3F3  F3;
       height: 100%;
     }
   </style>  
-  
-  </head>
+  {% endblock %}
   <title> {% block title %} Website name {% endblock %}</title>
+  </head>
+  
   
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -41,6 +43,6 @@
     </div>
     </nav>
     
-   {% block content %} Invalid Page {% endblock %}
+   {% block content %} Invalid Page. This will only show if the extend templates have no content. {% endblock %}
   </body>
 </html>
