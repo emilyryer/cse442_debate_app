@@ -76,3 +76,8 @@ pydoc () {
 if [ -n "${BASH-}" ] || [ -n "${ZSH_VERSION-}" ] ; then
     hash -r 2>/dev/null
 fi
+
+export SECRET_KEY='t93e*-=$m3@1)855-b_a^i$j)%ux^pq#8qg26q7p*s6ax*#mp6'
+export DJANGO_ENV='local'
+export GMAIL_SMTP_USER='tcl.pazz@gmail.com'
+export GMAIL_SMTP_PASSWORD='Cardinalls32'
