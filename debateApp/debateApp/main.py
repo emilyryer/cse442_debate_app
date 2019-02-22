@@ -12,6 +12,7 @@ def create_room(room_name='test_bucket'):
     new_room = client.create_bucket('debate-app-' + room_name)
     return 'Created new room in bucket {}'.format(room_name)
 
+#Check if the bucket already exists
 def get_buckets(room_name):
     return
 
