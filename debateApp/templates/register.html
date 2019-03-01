@@ -1,1 +1,24 @@
 {% extends 'templates/base.html' %}
+
+
+<div class="container">
+  <div class="jumbotron">
+    <h1> Create an account</h1>
+    <form>
+      <div class="form-group">
+        <label for="regiEmail">Email address</label>
+        <input type="email" class="form-control" id="regiEmail" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="regiPass">Password</label>
+        <input type="password" class="form-control" id="regiPass" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="regiPassConf">Confirm your Password</label>
+        <input type="password" class="form-control" id="regiPassConf" placeholder="Password">
+      </div>
+      <input style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit" value="Login">
+    </form>
+
+  </div>
+</div>
