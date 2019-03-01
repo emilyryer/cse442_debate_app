@@ -21,8 +21,10 @@ def createComment(roomBucket, commentText):
     return
 
 def reply(roomBucket, comment, replyText):
-    commentRoom = get_buckets(roomBucket)
-    thread = json.loads(comment)
+    storage_client = storage.Client()
+    commentRoom = storage_client.get_buckets(roomBucket)
+    blob = commentRoom.blob(comment)
+    thread = json.loads(blob)
     thread.append(replyText)
     json.dumps(thread)
 
@@ -30,8 +32,10 @@ def reply(roomBucket, comment, replyText):
 
 
 def deleteComment(roomBucket, comment, replyText):
-    commentRoom = get_buckets(roomBucket)
-    thread = json.loads(comment)
+    storage_client = storage.Client()
+    commentRoom = storage_client.get_buckets(roomBucket)
+    blob = commentRoom.blob(comment)
+    thread = json.loads(blob)
     thread.pop(0)
     json.dumps(thread)
 
