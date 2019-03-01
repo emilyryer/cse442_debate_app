@@ -43,6 +43,23 @@
     </div>
     </nav>
     
-   {% block content %} Invalid Page. This will only show if the extend templates have no content. {% endblock %}
+   {% block content %} Invalid Page. This will only show if the extend templates have no content. 
+   <div class="container">
+   <div class="jumbotron">
+    <h1> Create an account</h1>
+    <b> Username </b>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="enter here" aria-describedby="basic-addon1">
+      </div>
+      <p> </p>
+     <b> Password </b>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="enter here" aria-describedby="basic-addon1">
+      </div>
+
+  <span><a class="btn btn-primary btn-md" href="#" role="button">Register</a></span>
+</div>
+  </div>
+   {% endblock %}
   </body>
 </html>
