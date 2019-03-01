@@ -24,5 +24,15 @@ def reply(roomBucket, comment, replyText):
     commentRoom = get_buckets(roomBucket)
     thread = json.loads(comment)
     thread.append(replyText)
+    json.dumps(thread)
+
+    return commentThread
+
+
+def deleteComment(roomBucket, comment, replyText):
+    commentRoom = get_buckets(roomBucket)
+    thread = json.loads(comment)
+    thread.pop(0)
+    json.dumps(thread)
 
     return commentThread
