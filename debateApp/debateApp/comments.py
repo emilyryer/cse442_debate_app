@@ -1,16 +1,15 @@
 import logging
 import os
 import rooms.py
+import json
 
 from google.cloud import storage
 from flask import (Flask, render_template)
 
 def commentToFile(commentText):
-    f= open("comment.csv","w+")
-
-    f.write(commentText + ", ")
-    f.close()
-    return f
+    commentThread = {commentText}
+    x = json.dumps(commentThread)
+    return x
 
 
 def createComment(roomBucket, commentText):
@@ -22,10 +21,8 @@ def createComment(roomBucket, commentText):
     return
 
 def reply(roomBucket, comment, replyText):
-    comment = get_buckets(roomBucket)
-    f= open("comment.txt","w")
-    f.write(replyText + ",")
-    f.close()
-
+    commentRoom = get_buckets(roomBucket)
+    thread = json.loads(comment)
+    thread.append(replyText)
 
     return commentThread
