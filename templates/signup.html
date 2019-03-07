@@ -9,45 +9,31 @@
 <div class="container">
   <div class="jumbotron">
     <h1> Create an account</h1>
+    
     <form method="post">
      {% csrf_token %}
-      <div class="form-group">
-        <label for="regiEmail">Email address</label>
-        <input type="email" class="form-control" id="regiEmail" placeholder="Email">
-      </div>
-      <div class="form-group">
-        <label for="regiEmail">Nickname</label>
-        <input type="username" class="form-control" id="regiNick" placeholder="Nickname">
-      </div>
-      <div class="form-group">
-        <label for="regiPass">Password</label>
-        <input type="password" class="form-control" id="regiPass" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <label for="regiPassConf">Confirm your Password</label>
-        <input type="password" class="form-control" id="regiPassConf" placeholder="Password">
-      </div>
-      <input style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit" value="Login">
-    </form>
-
-  </div>
-</div>
-
-
-<h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
+  
+      
+      {% for field in form %}
      <div class="form-group">
-       {{ field.label_tag }}<br>
-       {{ field }}
+       {{ field.label_tag }}
+       <input type="text"
+       name="{{ field.name }}"
+       class="form-control"
+       id="{{ field.id_for_label }}"
+       {% if field.name.value != None %}value="{{ field.name.value|stringformat:'s' }}"{% endif %}
+       maxlength="{{ field.max_length }}"
+       {% if form.name.field.required %}required{% endif %}>
        {% for error in field.errors %}
          <p style="color: red">{{ error }}</p>
        {% endfor %}
      </div>
    {% endfor %} 
-   <button type="submit">Sign up</button>
- </form>
+   
+   <input style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit" value="Login"> 
+    </form>
 
+  </div>
+</div>
 
 {% endblock %}
