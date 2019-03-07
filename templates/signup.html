@@ -4,17 +4,20 @@
 
 {% block title %}Sign Up{% endblock %}
 
-
 {% block content %}
-
 
 <div class="container">
   <div class="jumbotron">
     <h1> Create an account</h1>
-    <form>
+    <form method="post">
+     {% csrf_token %}
       <div class="form-group">
         <label for="regiEmail">Email address</label>
         <input type="email" class="form-control" id="regiEmail" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="regiEmail">Nickname</label>
+        <input type="username" class="form-control" id="regiNick" placeholder="Nickname">
       </div>
       <div class="form-group">
         <label for="regiPass">Password</label>
@@ -35,14 +38,14 @@
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
-     <div>
+     <div class="form-group">
        {{ field.label_tag }}<br>
        {{ field }}
        {% for error in field.errors %}
          <p style="color: red">{{ error }}</p>
        {% endfor %}
      </div>
-   {% endfor %}
+   {% endfor %} 
    <button type="submit">Sign up</button>
  </form>
 

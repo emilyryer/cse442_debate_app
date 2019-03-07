@@ -3,16 +3,16 @@ from django.db import models
 
 # Create your models here.
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, password, nickName,):
+    def create_user(self, email, password, username,):
         if not email:
             raise ValueError('Email must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, nickName=nickName,)
+        user = self.model(email=email, username=username,)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, email, password, nickName,):
+    def create_superuser(self, email, password, username,):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
@@ -21,11 +21,11 @@ class MyUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-        return self.create_user(email, password, nickName,)
+        return self.create_user(email, password, username,)
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True)
-    nickName = models.CharField(max_length=30, blank=True, default='')
+    username = models.CharField(max_length=30, blank=True, default='')
 
     USERNAME_FIELD = 'email'
     objects = MyUserManager()
@@ -37,4 +37,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def get_short_name(self):
-        return self.nickName
+        return self.username
