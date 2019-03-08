@@ -1,13 +1,13 @@
 import logging
 import random
 
-from google.cloud import storage
+from google.cloud import (storage, exceptions)
 from flask import (Flask, render_template)
 
 client = storage.Client.from_service_account_json('creds.json')
 # from django.shortcuts import render
 app = Flask(__name__)
-logging.basicConfig(filename='create_room.log', level='INFO', format='w')
+logging.basicConfig(filename='room.log', level='INFO', format='w')
 
 @app.route('/')
 def response():
@@ -15,30 +15,35 @@ def response():
     return 'Main page'
 
 @app.route('/create')
-def create_room(room_name='test_bucket', topic='foo'):
-    rand_num = random.randint(100000, 999999) #generate a random 6 digit number
-    new_bucket_name = room_name + '-' + str(rand_num)
-    
-    for i in range(10): # Try to make the bucket with 10 different random numbers
-        if new_bucket_name in client.list_buckets():
-            rand_num = random.randint(100000, 999999)
-            new_bucket_name = room_name + '-' + str(rand_num)
-            continue
-        
-        logging.info('Attempting to make bucket with name {}'.format(new_bucket_name))
-        new_bucket = client.create_bucket(new_bucket_name)
-        add_bucket_label(new_bucket_name, 'topic', topic)
-        
-        logging.info('NEW BUCKET CREATED: {0}\t\tTOPIC: {1}'.format(
-                    new_bucket_name, topic))
-        return 'NEW BUCKET CREATED: {0}\t\tTOPIC: {1}'.format(
-                new_bucket_name, topic)
-    
-    logging.error('Unable to create room with the name {}'.format(room_name))
-    return 'Unable to create room with the name {}'.format(room_name)
+def create_room(room_name='default', topic='', user='unknown'):
+    if user == '' or user == 'unknown':
+        logging.warning('No username given')
+    new_bucket_name = room_name + '-' + user
 
-def delete_room():
-    return
+    if client.lookup_bucket(new_bucket_name) != None:
+        logging.error('Bucket already exists with name {}'.format(new_bucket_name))
+        return 'Bucket already exists with name {}'.format(new_bucket_name)
+
+    logging.info('Attempting to make bucket with name {}'.format(new_bucket_name))
+    try:
+        new_bucket = client.create_bucket(new_bucket_name)
+    except Exception as e:
+        return 'Unable to make bucket. Exception occurred: {}'.format(e)
+
+    add_bucket_label(new_bucket_name, 'topic', topic)
+
+    logging.info('NEW BUCKET CREATED: {0}\nOWNER: {1}\nTOPIC: {2}'.format(
+                new_bucket_name, user, topic))
+    return 'NEW BUCKET CREATED: {0}\nOWNER: {1}\nTOPIC: {2}'.format(
+                new_bucket_name, user, topic)
+
+@app.route('/delete')
+def delete_room(bucket_name):
+    """Deletes a room. The room must be empty."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    bucket.delete()
+    logging.info('Bucket {} deleted'.format(bucket.name))
 
 def add_bucket_label(bucket_name, key, value):
     """Add a label to a bucket."""
