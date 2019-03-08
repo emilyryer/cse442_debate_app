@@ -9,15 +9,19 @@
 <div class="container">
   <div class="jumbotron">
     <h1> Create an account</h1>
-    
+
     <form method="post">
      {% csrf_token %}
-  
-      
+
+
       {% for field in form %}
      <div class="form-group">
        {{ field.label_tag }}
-       <input type="text"
+       <input {%if "password" in field.id_for_label %}
+        type="password"
+        {%else%}
+         type="text"
+        {%endif%}
        name="{{ field.name }}"
        class="form-control"
        id="{{ field.id_for_label }}"
@@ -28,9 +32,9 @@
          <p style="color: red">{{ error }}</p>
        {% endfor %}
      </div>
-   {% endfor %} 
-   
-   <input style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit" value="Login"> 
+   {% endfor %}
+
+   <input style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit" value="Login">
     </form>
 
   </div>
