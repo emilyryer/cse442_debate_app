@@ -5,7 +5,6 @@ from google.cloud import (storage, exceptions)
 from flask import (Flask, render_template)
 
 client = storage.Client.from_service_account_json('creds.json')
-# from django.shortcuts import render
 app = Flask(__name__)
 logging.basicConfig(filename='room.log', level='INFO', format='w')
 
