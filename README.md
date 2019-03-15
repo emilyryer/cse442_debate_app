@@ -12,7 +12,7 @@
   
 ### Scrum Board
 
-[Zenhub Board, linked to our repository](https://github.com/emilyryer/cse442_debate_app#workspaces/442-5c647ef7f716dc7e3adf4f89/boards?repos=169471938)
+[Zenhub Board, linked to our repository](https://app.zenhub.com/workspaces/442-5c647ef7f716dc7e3adf4f89/boards?repos=169471938)
 
 ### Deployed App Link
 
