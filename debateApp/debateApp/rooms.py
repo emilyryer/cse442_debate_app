@@ -81,7 +81,7 @@ def list_blobs(bucket_name='default-unknown'):
     for blob in blobs:
         # blob.owner = 'unknown'
         blob_metadata(blob)
-    return 'All Blobs'
+    return 'All Blobs: {}'.format(blobs)
 
 def blob_metadata(blob):
     """Prints out a blob's metadata."""
