@@ -1,5 +1,6 @@
 import logging
 import random
+# import comments
 
 from google.cloud import (storage, exceptions)
 from flask import (Flask, render_template)
@@ -55,6 +56,62 @@ def add_bucket_label(bucket_name, key, value):
     bucket.patch()
 
     print('Updated labels on {}.'.format(bucket.name))
+
+@app.route('/comment')
+def upload_blob(bucket_name='default-unknown', comment='test', destination_blob_name='test-comment'):
+    """Uploads a blob to the bucket."""
+    bucket = client.get_bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_string(comment)
+    # metadata = {'Owner': 'unknown'}
+    # blob.metadata = metadata
+
+    return('String {} uploaded to {}.'.format(
+        comment,
+        destination_blob_name))
+
+@app.route('/blobs')
+def list_blobs(bucket_name='default-unknown'):
+    """Lists all the blobs in the bucket."""
+    bucket = client.get_bucket(bucket_name)
+
+    blobs = bucket.list_blobs()
+
+    for blob in blobs:
+        # blob.owner = 'unknown'
+        blob_metadata(blob)
+    return 'All Blobs'
+
+def blob_metadata(blob):
+    """Prints out a blob's metadata."""
+
+    print('Blob: {}'.format(blob.name))
+    print('Bucket: {}'.format(blob.bucket.name))
+    print('Storage class: {}'.format(blob.storage_class))
+    print('ID: {}'.format(blob.id))
+    print('Size: {} bytes'.format(blob.size))
+    print('Updated: {}'.format(blob.updated))
+    print('Generation: {}'.format(blob.generation))
+    print('Metageneration: {}'.format(blob.metageneration))
+    print('Etag: {}'.format(blob.etag))
+    print('Owner: {}'.format(blob.owner))
+    print('Component count: {}'.format(blob.component_count))
+    print('Crc32c: {}'.format(blob.crc32c))
+    print('md5_hash: {}'.format(blob.md5_hash))
+    print('Cache-control: {}'.format(blob.cache_control))
+    print('Content-type: {}'.format(blob.content_type))
+    print('Content-disposition: {}'.format(blob.content_disposition))
+    print('Content-encoding: {}'.format(blob.content_encoding))
+    print('Content-language: {}'.format(blob.content_language))
+    print('Metadata: {}'.format(blob.metadata))
+    print("Temporary hold: ",
+          'enabled' if blob.temporary_hold else 'disabled')
+    print("Event based hold: ",
+          'enabled' if blob.event_based_hold else 'disabled')
+    if blob.retention_expiration_time:
+        print("retentionExpirationTime: {}"
+              .format(blob.retention_expiration_time))
 
 
 @app.errorhandler(500)

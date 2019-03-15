@@ -1,10 +1,12 @@
 import logging
 import os
-import rooms.py
+import rooms
 import json
 
 from google.cloud import storage
 from flask import (Flask, render_template)
+
+app = Flask(__name__)
 
 def commentToFile(commentText):
     commentThread = {commentText}
@@ -12,8 +14,8 @@ def commentToFile(commentText):
     return x
 
 
-def createComment(roomBucket, commentText):
-    f=commentToFile(commentText)
+def createComment(bucket, commentText, parentComment=None):
+    f = commentToFile(commentText)
     storage_client = storage.Client()
     room = storage_client.get_bucket(bucket_name)
     room.upload_from_filename(f)
