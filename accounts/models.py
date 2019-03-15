@@ -7,7 +7,7 @@ class MyUserManager(BaseUserManager):
         if not email:
             raise ValueError('Email must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, nickName=nickName,)
+        user = self.model(email=email, username=nickName,)
         user.set_password(password)
         user.save()
         return user
