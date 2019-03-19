@@ -1,0 +1,37 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Hi {{ user.nickName }}!</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="well well-lg">
+        <a href="#"><h4>Rooms I've Created</h4></a>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="well well-lg">
+        <a href="#"><h4>Rooms I've Followed</h4></a>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="well well-lg">
+        <a href="#"><h4>My Information</h4></a>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'signup' %}">register</a>
+{% endif %}
+{% endblock %}

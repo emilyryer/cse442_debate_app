@@ -1,0 +1,26 @@
+<!-- templates/signup.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Create an Account</h1>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div>
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% for error in field.errors %}
+         <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endfor %}
+        <button style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit">Sign up</button>
+      </form>
+ </div>
+</div>
+{% endblock %}
