@@ -11,5 +11,6 @@ search_box.submit()
 time.sleep(5) # Let the user actually see something!
 
 html = driver.page_source
-print(html) #this is going to be painfully long, but it works, I swear
-driver.quit()
+print(html) #this is going to be painfully long, but it makes sense, I swear
+
+driver.quit() #terminates program
