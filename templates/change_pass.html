@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Change Password{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<form method="post">
+  {% csrf_token %}
+  {% for field in form %}
+  <div>
+    {{ field.label_tag }}<br>
+    {{ field }}
+    {% for error in field.errors %}
+   <p style="color: red">{{ error }}</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  <button style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit">Submit</button>
+</form>
+<a style="position:relative;float:right;" class="btn btn-primary btn-lg" href="{% url 'profile' %}">Cancel</a>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'signup' %}">register</a>
+{% endif %}
+{% endblock %}
