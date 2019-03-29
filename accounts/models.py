@@ -7,27 +7,25 @@ class MyUserManager(BaseUserManager):
         if not email:
             raise ValueError('Email must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, username=nickName,)
+        user = self.model(email=email, nickName=nickName,)
         user.set_password(password)
         user.save()
         return user
 
     def create_superuser(self, email, password, nickName,):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
+        user = self.create_user(email=email, password=password, nickName=nickName,)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
 
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
-        return self.create_user(email, password, nickName,)
+        return user
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True)
     nickName = models.CharField(max_length=30, blank=True, default='')
 
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['nickName']
     objects = MyUserManager()
 
     def __str__(self):

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>{{ user.nickName }}</h1>
+<h1>{{ user.email }}</h1>
+<form method="get">
+  <button type="submit" value="Click" name="cpass">Change Password</button>
+</form>
+<form method="get">
+  <button type="submit" value="Click" name="cuser">Change Username</button>
+</form>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'signup' %}">register</a>
+{% endif %}
+{% endblock %}
