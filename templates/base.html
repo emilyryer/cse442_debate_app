@@ -17,7 +17,7 @@
   <style>
     .navbar {
       background-color: #005bbb; /*The Official UB Blue*/
-      color: #ffffff;
+      color:#ffffff;
     }
     .navbar li a, .navbar .navbar-brand {
       color: #ffffff;
@@ -31,6 +31,9 @@
     }
     .modal-body, .modal-title{
       color:#000000;
+    }
+    .navbar-toggler{
+      background-color:#ffffff;
     }
   </style>
 {% endblock %}
@@ -57,6 +60,7 @@
         <div class="modal fade" id="roomModal" tabindex="-1" role="dialog" aria-labelledby="roomModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
+            <form>
             <div class="modal-header">
               <h5 class="modal-title" id="roomModalLabel">Create a Room</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -64,12 +68,16 @@
               </button>
             </div>
             <div class="modal-body">
-            ere goes the form
+            <div class="form-group">
+              <label for="Topic">Room Topic</label>
+              <input type="text" class="form-control" id="createTopic" aria-describedby="createTopic" placeholder="The room topic">
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary">Create!</button>
             </div>
+            </form>
           </div>
         </div>
         </div>
