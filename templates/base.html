@@ -17,7 +17,7 @@
   <style>
     .navbar {
       background-color: #005bbb; /*The Official UB Blue*/
-      color: #ffffff;
+      color:#ffffff;
     }
     .navbar li a, .navbar .navbar-brand {
       color: #ffffff;
@@ -29,12 +29,18 @@
       background-color: #F3F3F3;
       height: 100%;
     }
+    .modal-body, .modal-title{
+      color:#000000;
+    }
+    .navbar-toggler{
+      background-color:#ffffff;
+    }
   </style>
 {% endblock %}
   <meta charset="utf-8">
   <title>{% block title %}Debate App{% endblock %}</title>
 </head>
-
+{% load i18n widget_tweaks %}
 
 <body>
   <nav class="navbar navbar-expand-lg">
@@ -44,8 +50,42 @@
      </button>
    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
      <div class="navbar-nav">
-       <a class="nav-item nav-link" href=""><b>Room</b> {{current_code}} </a>
        {% if user.is_authenticated %}
+        <!-- Button trigger modal -->
+        <a class ="nav-item nav-link" data-toggle="modal" data-target="#roomModal">
+          <b>Create/Join Room </b>
+        </a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="roomModal" tabindex="-1" role="dialog" aria-labelledby="roomModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="roomModalLabel">Create a Room</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+              <label for="roomTopic">Room Topic</label>
+              <input type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The room topic">
+            </div>
+            <div class="form-group">
+              <label for="roomName">Room Name</label>
+              <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The room name">
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Create!</button>
+            </div>
+            </form>
+          </div>
+        </div>
+        </div>
+        <!-- End Modal -->
        <a class="nav-item nav-link" href="#">My Profile</a>
        <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
         {% else %}
