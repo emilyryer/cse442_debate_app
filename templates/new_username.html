@@ -4,20 +4,17 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<form method="post">
-  {% csrf_token %}
-  {% for field in form %}
-  <div>
-    {{ field.label_tag }}<br>
-    {{ field }}
-    {% for error in field.errors %}
-   <p style="color: red">{{ error }}</p>
-    {% endfor %}
+<div class="container">
+  <div class="jumbotron">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <br>
+      <button style="position:relative;float:left;" class="btn btn-primary btn-lg" type="submit">Submit</button>
+    </form>
+    <a style="position:relative;float:left;" class="btn btn-primary btn-lg" href="/accounts/profile">Cancel</a>
   </div>
-  {% endfor %}
-  <button style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit">Submit</button>
-</form>
-<a style="position:relative;float:right;" class="btn btn-primary btn-lg" href="{% url 'profile' %}">Cancel</a>
+</div>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>

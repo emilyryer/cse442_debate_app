@@ -4,14 +4,30 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1>{{ user.nickName }}</h1>
-<h1>{{ user.email }}</h1>
-<form method="get">
-  <button type="submit" value="Click" name="cpass">Change Password</button>
-</form>
-<form method="get">
-  <button type="submit" value="Click" name="cuser">Change Username</button>
-</form>
+{% csrf_token %}
+<div class="container">
+  <div class="row justify-content-center">
+    <h1>{{ user.nickName }}</h1>
+  </div>
+  <div class="row justify-content-center">
+    <h1>{{ user.email }}</h1>
+  </div>
+  <div class="row justify-content-center">
+    <form method="get">
+      <button type="submit" value="Click" name="cpass">Change Password</button>
+    </form>
+  </div>
+  <div class="row justify-content-center">
+    <form method="get">
+      <button type="submit" value="Click" name="cuser">Change Username</button>
+    </form>
+  </div>
+  <div class="row justify-content-center">
+    <form method="get">
+      <button type="submit" value="Click" name="deleteacc">Delete Account</button>
+    </form>
+  </div>
+</div>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
