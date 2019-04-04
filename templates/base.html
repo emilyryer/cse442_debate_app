@@ -53,7 +53,7 @@
        {% if user.is_authenticated %}
         <!-- Button trigger modal -->
         <a class ="nav-item nav-link" data-toggle="modal" data-target="#roomModal">
-          <b>Create/Join Room </b>
+          <b>Create Room </b>
         </a>
 
         <!-- Modal -->
@@ -76,6 +76,39 @@
               <label for="roomName">Room Name</label>
               <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The room name">
             </div>
+            <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Create!</button>
+            </div>
+            </form>
+          </div>
+        </div>
+        </div>
+        <!-- End Modal -->
+         <!-- Button trigger modal -->
+        <a class ="nav-item nav-link" data-toggle="modal" data-target="#joinModal">
+          <b>Join Room </b>
+        </a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+              <label for="roomId">Room ID</label>
+              <input type="text" class="form-control" id="roomID" aria-describedby="joinID" placeholder="The room Identifier">
+            </div>
+            
             <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
             </div>
             <div class="modal-footer">
