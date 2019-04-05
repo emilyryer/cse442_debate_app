@@ -33,7 +33,8 @@ except NoSuchElementException:
 #This part creates a unique email.
 timestamp = time.time()
 timestring = str(timestamp)
-email_field.send_keys(timestring + 'test@test.123')
+email = timestring + 'test@test.123'
+email_field.send_keys(email)
 nickname_field.send_keys('Reg_test')
 password1_field.send_keys('Login_pass')
 password2_field.send_keys('Login_pass')
