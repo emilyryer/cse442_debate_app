@@ -8,7 +8,7 @@
   <!-- Local stylesheets, JS libraries, etc -->
 
   <!-- This file only CSS -->
-  
+
 {% endblock %}
 <!-- Bootstrap and navbar-specific pages are not in block head, so they may work on all sites which have the navbar.-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -18,7 +18,7 @@
  <style>
     .navbar {
       background-color: #005bbb; /*The Official UB Blue*/
-      color:#ffffff;
+      color: #ffffff;
     }
     .navbar li a, .navbar .navbar-brand {
       color: #ffffff;
@@ -40,7 +40,7 @@
   <meta charset="utf-8">
   <title>{% block title %}Debate App{% endblock %}</title>
 </head>
-{% load i18n widget_tweaks %}
+
 
 <body>
   <nav class="navbar navbar-expand-lg">
@@ -50,6 +50,7 @@
      </button>
    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
      <div class="navbar-nav">
+       <a class="nav-item nav-link" href=""><b>Room</b> {{current_code}} </a>
        {% if user.is_authenticated %}
         <!-- Button trigger modal -->
         <a class ="nav-item nav-link" data-toggle="modal" data-target="#roomModal">
@@ -108,7 +109,7 @@
               <label for="roomId">Room ID</label>
               <input type="text" class="form-control" id="roomID" aria-describedby="joinID" placeholder="The room Identifier">
             </div>
-            
+
             <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
             </div>
             <div class="modal-footer">
