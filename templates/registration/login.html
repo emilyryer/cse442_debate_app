@@ -1,6 +1,15 @@
  {% extends 'base.html' %}
 
 {% block content %}
+{% if form.errors %}
+<div class="alert alert-danger">
+  <a class="close" href="#" data-dismiss="alert">×</a>
+  <p class=" label label-danger">
+      Your username and password didn't match.
+      Please try again.
+  </p>
+</div>
+{% endif %}
 <div class="container">
   <div class="jumbotron">
     <h1> Welcome Back!</h1>
@@ -10,9 +19,6 @@
       <div>
         {{ field.label_tag }}<br>
         {{ field }}
-        {% for error in field.errors %}
-       <p style="color: red">{{ error }}</p>
-        {% endfor %}
       </div>
       {% endfor %}
     <button style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit">Login</button>
