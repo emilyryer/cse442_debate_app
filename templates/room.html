@@ -1,14 +1,30 @@
 {% extends 'base.html' %}
 
+{% block head %}
+  <style> 
+    .topic{
+   position: absolute;
+    background-color:#005bbb;
+    color:#FFFFFF;
+  }
+
+  </style>
+
+{% endblock %}
 {% block title %}Debate Room{% endblock %}
 
-<div class="container">
-  <div class="jumbotron">
-    <h1>Debate Question: {{ PLACEHOLDER FOR DEBATE TOPIC }}!</h1>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
+<div class="container container-room">
+	<div class="row">
+    	<div class="col-1 col-md-2"> </div>
+        	<div class="topic jumbotron jumbotron-fluid col-10 col-md-8">
+              <div class="container-fluid">
+    			<h1 style="text-align:center;" class=display-4> {{Example Debate Topic}} </h1>
+  				</div>
+        </div>
+      	<div class="col-1 col-md-2"> </div>
+	</div>
+	
+	<div class="row">
     <div class="col-sm-6">
       <div class="well well-lg">
         <h4>Agree</h4>

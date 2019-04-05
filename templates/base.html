@@ -4,17 +4,18 @@
 
 <head>
   {% block head %}
-  <!-- LOCAL BOOTSTRAP FILES:
-    REMOVE once boostrap is added into Django directly -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   <!-- Local stylesheets, JS libraries, etc -->
 
   <!-- This file only CSS -->
-  <style>
+  
+{% endblock %}
+<!-- Bootstrap and navbar-specific pages are not in block head, so they may work on all sites which have the navbar.-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <style>
     .navbar {
       background-color: #005bbb; /*The Official UB Blue*/
       color:#ffffff;
@@ -36,7 +37,6 @@
       margin-top: 20px;
     }
   </style>
-{% endblock %}
   <meta charset="utf-8">
   <title>{% block title %}Debate App{% endblock %}</title>
 </head>
@@ -53,7 +53,7 @@
        {% if user.is_authenticated %}
         <!-- Button trigger modal -->
         <a class ="nav-item nav-link" data-toggle="modal" data-target="#roomModal">
-          <b>Create/Join Room </b>
+          <b>Create Room </b>
         </a>
 
         <!-- Modal -->
@@ -76,6 +76,40 @@
               <label for="roomName">Room Name</label>
               <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The room name">
             </div>
+            <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Create!</button>
+            </div>
+            </form>
+          </div>
+        </div>
+        </div>
+        <!-- End Modal -->
+         <!-- Button trigger modal -->
+        <a class ="nav-item nav-link" data-toggle="modal" data-target="#joinModal">
+          <b>Join Room </b>
+        </a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form>
+            <div class="modal-header">
+              <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+              <label for="roomId">Room ID</label>
+              <input type="text" class="form-control" id="roomID" aria-describedby="joinID" placeholder="The room Identifier">
+            </div>
+            
+            <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
