@@ -1,5 +1,6 @@
 import time
 from selenium import webdriver
+import test_methods
 
 #this test creates a fake email that is unique each time by using a timestamp.
 
@@ -45,5 +46,8 @@ except NoSuchElementException:
     driver.quit()
 
 time.sleep(2)
+
+test_methods.logout()
+
 
 driver.quit()
