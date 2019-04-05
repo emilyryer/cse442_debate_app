@@ -1,5 +1,6 @@
 import time
 from selenium import webdriver
+import test_functions
 
 #This test is to show that you've properly set up selenium on your system.
 driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in the selenium_tests/chrome folder
