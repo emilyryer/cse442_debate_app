@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,9 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tgds!gvmu7p4m5y%02l^2azr39m8eo)2)&66nq76w(vb1m=&6m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = os.environ['DEBUG'] == 'True' # environment vars are strings
+DEBUG = 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'zippy-hold-232119.appspot.com'
+    # '127.0.0.1:8000', # for local testing
+]
 
 
 # Application definition
@@ -74,12 +77,26 @@ WSGI_APPLICATION = 'cse442_debate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if os.getenv('GAE_APPLICATION', None):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/zippy-hold-232119:us-east1:debate-app',
+            'NAME': 'login_server',
+            'USER': 'account-manager',
+            'PASSWORD': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'HOST': '/cloudsql/zippy-hold-232119:us-east1:debate-app',
+            'USER': 'account-manager',
+            'PASSWORD': '',
+            'NAME': 'debate-app',
+        }
+    }
 
 
 # Password validation
