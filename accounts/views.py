@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.exceptions import ValidationError
+from django import forms
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import SignUpForm
-from .forms import ResetForm
+from .forms import DeleteAcc
 from .forms import NewName
 from django.http import HttpResponseRedirect
+from django.contrib.auth import update_session_auth_hash
+from accounts.models import User
+from django.contrib import messages
 
 
 def signup(request):
@@ -25,23 +31,17 @@ def signup(request):
 def profile(request):
     if(request.GET.get('cpass')):
         if request.method == 'POST':
-            form = ResetForm(request.POST)
+            form = PasswordChangeForm(user=request.user, data=request.POST)
             if form.is_valid():
-                newpassword=form.cleaned_data['new_pass1'],
-                email=request.user.email
-                password=form.cleaned_data['old_pass']
-
-                user = authenticate(email=email, password=password)
-                if user is not None:
-                    user.set_password(newpassword)
-                    user.save()
-                    return redirect('profile')
-                else:
-                    return render(request, 'change_pass.html',{'error':'You have entered wrong old password','form': form})
+                user = form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, 'Your password was successfully updated!')
+                return redirect('/accounts/profile')
             else:
-                return render(request, 'change_pass.html',{'error':'You have entered old password','form': form})
+                print(form.error_messages)
+                messages.error(request, 'Please correct the error below.')
         else:
-            form = ResetForm()
+            form = PasswordChangeForm(request.user)
         return render(request, 'change_pass.html', {'form': form})
 
     if(request.GET.get('cuser')):
@@ -49,6 +49,8 @@ def profile(request):
             form = NewName(request.POST)
             if form.is_valid():
                 newusername=form.cleaned_data['new_username']
+                email=request.user.email
+                user = User.objects.get(email = email)
                 user.set_username(newusername)
                 user.save()
                 return redirect('profile')
@@ -57,5 +59,28 @@ def profile(request):
         else:
             form = NewName()
         return render(request, 'new_username.html', {'form': form})
+
+    if(request.GET.get('deleteacc')):
+        if request.method == 'POST':
+            form = DeleteAcc(request.POST)
+            if form.is_valid():
+                email=request.user.email
+                user = authenticate(email=form.cleaned_data['del_email'], password=form.cleaned_data['delpassword'])
+                if user is None:
+                    print("does not exhist")
+                    messages.error(request,'username or password not correct')
+                    return render(request,'delete_acc.html', {'form' : form})
+                else:
+                    user = User.objects.get(email = email)
+                    user.delete()
+                    update_session_auth_hash(request, user)
+                    print("deleted")
+                    return redirect('home')
+            else:
+                print("not valid")
+                return render(request, 'delete_acc.html',{'error':'Enter a valid username','form': form})
+        else:
+            form = DeleteAcc()
+        return render(request, 'delete_acc.html', {'form': form})
 
     return render(request, 'profile.html')
