@@ -6,9 +6,13 @@ driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in
 driver.get('http://127.0.0.1:8000/');
 time.sleep(2) # Let the user actually see something!
 
-email = test_functions.generateTestEmail()
-test_functions.register(email, 'create_test', 'create_pass', driver)
+email1 = test_functions.generateTestEmail()
+test_functions.register(email1, 'create_test1', 'create_pass1', driver)
 
 test_functions.createRoom('Test', 'Test Question')
 
-driver.quit() #terminates program
+#This is where we get the room ID
+
+test_functions.logout()
+email2 = test_functions.generateTestEmail()
+test_functions.register(email2, 'create_test2', 'create_pass2', driver)'

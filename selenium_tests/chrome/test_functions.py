@@ -11,7 +11,6 @@ def generateTestEmail():
     email = timestring + 'test@test.123'
     return email
 
-
 def login(username, password, driver):
     login_link = driver.find_element_by_link_text('login')
     login_link.click()
@@ -87,3 +86,21 @@ def register(email, username, password, driver):
         driver.quit()
 
     time.sleep(2)
+
+def createRoom(topic, question):
+    createButton = driver.find_element_by_link_text('Create Room')
+    createButton.click()
+    time.sleep(1)
+
+    nameField = driver.find_element_by_id('roomName')
+    topicField = driver.find_element_by_id('roomTopic')
+    createButton = driver.find_element_by_id('createButton')
+
+    nameField.send_keys(topic)
+    topicField.send_keys(question)
+    time.sleep(1)
+    createButton.click()
+    time.sleep(1)
+
+def joinRoom(roomname, roomID):
+    
