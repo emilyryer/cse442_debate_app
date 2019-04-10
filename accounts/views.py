@@ -3,8 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import SignUpForm
-from rooms import rooms
-from rooms import views
+from rooms.views import room_render
 
 
 def signup(request):
@@ -35,6 +34,6 @@ def request_page(request):
         #TODO: Handle error
         return 0
       elif(createStatus.startswith('NEW')): #NEW BUCKET CREATED
-        return rooms.views.room_render(request, roomTopic)
+        return room_render(request, roomTopic)
       else: # Undefined behavior
         return 0
