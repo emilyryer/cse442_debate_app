@@ -16,5 +16,6 @@ Including another URLconf
 from django.urls import path
 
 urlpatterns = [
+    path('room/<slug:slug>/', views.individual_room)
     # path('create/', view.create, name='create')
 ]
