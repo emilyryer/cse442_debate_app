@@ -26,8 +26,8 @@ SECRET_KEY = 'tgds!gvmu7p4m5y%02l^2azr39m8eo)2)&66nq76w(vb1m=&6m'
 DEBUG = 'True'
 
 ALLOWED_HOSTS = [
-    'zippy-hold-232119.appspot.com'
-    # '127.0.0.1:8000', # for local testing
+    'zippy-hold-232119.appspot.com',
+    '127.0.0.1', # for local testing
 ]
 
 
@@ -84,18 +84,19 @@ if os.getenv('GAE_APPLICATION', None):
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '/cloudsql/zippy-hold-232119:us-east1:debate-app',
             'NAME': 'login_server',
-            'USER': 'account-manager',
-            'PASSWORD': '',
+            'USER': 'migrate',
+            'PASSWORD': 'debateapp',
         }
     }
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'HOST': '/cloudsql/zippy-hold-232119:us-east1:debate-app',
-            'USER': 'account-manager',
-            'PASSWORD': '',
-            'NAME': 'debate-app',
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'USER': 'migrate',
+            'PASSWORD': 'debateapp',
+            'NAME': 'login_server',
         }
     }
 

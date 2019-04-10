@@ -1,20 +1,14 @@
 import logging
 import random
-# import comments
 
 from google.cloud import (storage, exceptions)
-from flask import (Flask, render_template)
 
 client = storage.Client.from_service_account_json('creds.json')
-app = Flask(__name__)
 logging.basicConfig(filename='room.log', level='INFO', format='w')
 
-@app.route('/')
 def response():
-    # return render('index.html')
     return 'Main page'
 
-@app.route('/create')
 def create_room(room_name='default', topic='', user='unknown'):
     if user == '' or user == 'unknown':
         logging.warning('No username given')
@@ -31,13 +25,24 @@ def create_room(room_name='default', topic='', user='unknown'):
         return 'Unable to make bucket. Exception occurred: {}'.format(e)
 
     add_bucket_label(new_bucket_name, 'topic', topic)
+    add_bucket_label(new_bucket_name, 'join-code', random.randint(1000, 9999))
 
     logging.info('NEW BUCKET CREATED: {0}\nOWNER: {1}\nTOPIC: {2}'.format(
                 new_bucket_name, user, topic))
     return 'NEW BUCKET CREATED: {0}\nOWNER: {1}\nTOPIC: {2}'.format(
                 new_bucket_name, user, topic)
 
-@app.route('/delete')
+def join_room(room_name, join_code):
+    room = client.lookup_bucket(room_name)
+    if room == None:
+        logging.error('No bucket exists with name {}'.format(room_name))
+    labels = room.labels
+    if int(join_code) == int(labels[join-code]):
+        return room
+    logging.error(
+        'Incorrect join code given. Was given room {0} with code {1}'.format(
+        room_name, join_code))
+
 def delete_room(bucket_name):
     """Deletes a room. The room must be empty."""
     storage_client = storage.Client()
@@ -57,7 +62,6 @@ def add_bucket_label(bucket_name, key, value):
 
     print('Updated labels on {}.'.format(bucket.name))
 
-@app.route('/comment')
 def upload_blob(bucket_name='default-unknown', comment='test', destination_blob_name='test-comment'):
     """Uploads a blob to the bucket."""
     bucket = client.get_bucket(bucket_name)
@@ -71,7 +75,6 @@ def upload_blob(bucket_name='default-unknown', comment='test', destination_blob_
         comment,
         destination_blob_name))
 
-@app.route('/blobs')
 def list_blobs(bucket_name='default-unknown'):
     """Lists all the blobs in the bucket."""
     bucket = client.get_bucket(bucket_name)
@@ -114,7 +117,6 @@ def blob_metadata(blob):
               .format(blob.retention_expiration_time))
 
 
-@app.errorhandler(500)
 def server_error(e):
     logging.exception('An error occurred during a request.')
     return """
