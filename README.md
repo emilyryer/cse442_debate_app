@@ -28,8 +28,3 @@ Coming Soon!
 * Front-end CSS Design: Bootstrap
 
 * Testing: Selenium
-<<<<<<< HEAD
-
-  
-=======
->>>>>>> b8f0de512527c003e259b7c63ab13bd27f825b00
