@@ -45,6 +45,7 @@
   </style>
   <script>
   $("#createbtn").click(function() {
+    console.log("clicked");
     var data = {topic: $('#roomTopic').val(), roomname : $('#roomName').val()};
     $.ajax({
       url: ("/room/create/"),
