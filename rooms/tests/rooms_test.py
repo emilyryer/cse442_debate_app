@@ -12,10 +12,10 @@ class TestRooms(unittest.TestCase):
 	def test_add_label(self):
 		logging.info('Starting label test')
 		buckets = client.list_buckets(prefix='label-test')
-		try:
-			bucket =
-		except Exception as e:
-			raise e
+		#try:
+			#bucket =
+		#except Exception as e:
+			#raise e
 		create_room('label-test', 'testing the label maker')
 
 if __name__ == '__main__':
