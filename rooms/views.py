@@ -9,8 +9,10 @@ def room_render(request, roomID):
 
 
 def create(request):
-   if(request.method == 'GET'):
-    if(request.user.is_authenticated()):
+  if(request.method == 'POST'):
+      print("request recieved to create a room.")
+      print (request)
+  if(request.user.is_authenticated() ):
       username = user.nicName()
       roomName = request.GET.get('roomname')
       roomTopic = request.GET.get('topic')
@@ -25,4 +27,4 @@ def create(request):
         return room_render(request, roomTopic)
       else: # Undefined behavior
         return 0
-    return 0
+  return 0

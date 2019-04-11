@@ -44,10 +44,10 @@
     }
   </style>
   <script>
-  $("#createbtn").click(function() {
-    console.log("clicked");
+  $(document).on('click', "#createbtn" , function() {
     var data = {topic: $('#roomTopic').val(), roomname : $('#roomName').val()};
     $.ajax({
+      type: "POST",
       url: ("/room/create/"),
       data: data,
       dataType: "json"});

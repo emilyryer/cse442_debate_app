@@ -17,7 +17,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('room/create/', views.create, name="create_room"),
-    path('room/<slug:roomID>/', views.room_render, name="room")
-    # path('create/', view.create, name='create')
+    path('create/', views.create, name="create_room"),
+    path('<slug:roomID>/', views.room_render, name="room")
 ]
