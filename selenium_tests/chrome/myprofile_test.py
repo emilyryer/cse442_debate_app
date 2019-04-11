@@ -7,7 +7,7 @@ import test_functions
 #Email is test@test.123, Username is Login_test, password is Login_pass
 
 driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in the selenium_tests/chrome folder
-driver.get('http://127.0.0.1:8000/');
+driver.get('https://zippy-hold-232119.appspot.com/');
 time.sleep(1)
 
 email = 'hello@123.hello'

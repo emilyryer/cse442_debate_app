@@ -102,5 +102,4 @@ def createRoom(topic, question):
     createButton.click()
     time.sleep(1)
 
-def joinRoom(roomname, roomID):
-    
+#def joinRoom(roomname, roomID):
