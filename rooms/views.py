@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.views import generic
+import rooms
 
 def room_render(request, roomID):
   context = {'slug':roomID}
@@ -12,10 +13,10 @@ def create(request):
   if(request.method == 'POST'):
       print("request recieved to create a room.")
       print (request)
-  if(request.user.is_authenticated() ):
-      username = user.nicName()
-      roomName = request.GET.get('roomname')
-      roomTopic = request.GET.get('topic')
+  if(request.user.is_authenticated ):
+      username = request.user.nickName
+      roomName = request.POST.get('roomname')
+      roomTopic = request.POST.get('topic')
       createStatus = rooms.create_room(roomName, roomTopic, user)
       if(createStatus.startswith('Unable')): #Unable to make bucket
         #TODO: Handle error
