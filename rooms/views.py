@@ -11,13 +11,13 @@ def room_render(request, roomID):
 
 def create(request):
   if(request.method == 'POST'):
-      print("request recieved to create a room.")
-      print (request)
+      print("Request recieved to create a room.")
   if(request.user.is_authenticated ):
+      print("User which made request is signed in.")
       username = request.user.nickName
       roomName = request.POST.get('roomname')
-      roomTopic = request.POST.get('topic')
-      createStatus = rooms.create_room(roomName, roomTopic, user)
+      roomTopic = request.POST.get('topic')       
+      createStatus = rooms.create_room(room_name=roomName, topic=roomTopic, user=username)
       if(createStatus.startswith('Unable')): #Unable to make bucket
         #TODO: Handle error
         return 0
