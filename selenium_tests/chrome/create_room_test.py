@@ -6,10 +6,15 @@ driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in
 driver.get('https://zippy-hold-232119.appspot.com/');
 time.sleep(2) # Let the user actually see something!
 
-email = 'test@test.123'
+email = '123@test.123'
 test_functions.register(email, 'create_test', 'create_pass', driver)
 
 test_functions.createRoom('Test', 'Test Question', driver)
+
+driver.refresh()
+
+profilelink = driver.find_element_by_link_text('My Profile')
+profilelink.click()
 
 test_functions.delete_account(email, 'create_pass', driver)
 driver.quit() #terminates program
