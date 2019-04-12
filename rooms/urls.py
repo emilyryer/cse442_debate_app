@@ -18,5 +18,6 @@ from . import views
 
 urlpatterns = [
     path('create/', views.create, name="create_room"),
+    path('join/', views.join, name="join_room"),
     path('<slug:roomID>/', views.room_render, name="room")
 ]

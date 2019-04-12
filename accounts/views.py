@@ -13,7 +13,6 @@ from django.contrib.auth import update_session_auth_hash
 from accounts.models import User
 from django.contrib import messages
 
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -26,7 +25,6 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
-
 
 def profile(request):
     if(request.GET.get('cpass')):

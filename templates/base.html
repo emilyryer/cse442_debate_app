@@ -15,6 +15,12 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+  <!-- JQuery --> 
+  <script
+  src="https://code.jquery.com/jquery-3.4.0.js"
+  integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+  crossorigin="anonymous"></script>
  <style>
     .navbar {
       background-color: #005bbb; /*The Official UB Blue*/
@@ -37,6 +43,29 @@
       margin-top: 20px;
     }
   </style>
+  <script>
+  $(document).on('click', "#createbtn" ,function(){
+    var ctopic = $('#roomTopic').val();
+    var croom = $('#roomName').val()
+    $.ajax({
+      type: "POST",
+      url: ("/room/create/"),
+      data: {topic: ctopic , roomname : croom , csrfmiddlewaretoken: '{{csrf_token}}'},
+      dataType: "json",
+      });
+    });
+    $(document).on('click', "#joinbtn" ,function(){
+    var jid = $('#joinCode').val();
+    var jroom = $('#joinName').val()
+    $.ajax({
+      type: "POST",
+      url: ("/room/join/"),
+      data: {id: jid , roomname : jroom , csrfmiddlewaretoken: '{{csrf_token}}'},
+      dataType: "json",
+      });
+    }); 
+      
+  </script>
   <meta charset="utf-8">
   <title>{% block title %}Debate App{% endblock %}</title>
 </head>
@@ -61,7 +90,7 @@
         <div class="modal fade" id="roomModal" tabindex="-1" role="dialog" aria-labelledby="roomModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <form>
+            <form action="#" method="POST">{% csrf_token %}
             <div class="modal-header">
               <h5 class="modal-title" id="roomModalLabel">Create a Room</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -71,17 +100,16 @@
             <div class="modal-body">
             <div class="form-group">
               <label for="roomTopic">Room Topic</label>
-              <input type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The Room Topic">
+              <input name="createTopic" type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The room topic">
             </div>
             <div class="form-group">
-              <label for="roomName">Debate Question</label>
-              <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The Debate Question">
+              <label for="roomName">Room Name</label>
+              <input name="createName" type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The room name">
             </div>
-            <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="createButton">Create!</button>
+              <button id="createbtn" type="button" class="btn btn-primary">Create!</button>
             </div>
             </form>
           </div>
@@ -97,7 +125,7 @@
         <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <form>
+            <form action="#" method=get>
             <div class="modal-header">
               <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -106,15 +134,19 @@
             </div>
             <div class="modal-body">
             <div class="form-group">
-              <label for="roomId">Room ID</label>
-              <input type="text" class="form-control" id="roomID" aria-describedby="joinID" placeholder="The room Identifier">
+              <label for="joinName">Room Name</label>
+              <input type="text" class="form-control" id="joinName" aria-describedby="joinID" placeholder="The room Name">
+            </div>
+            <div class="form-group">
+              <label for="joinCode">Room Name</label>
+              <input type="text" class="form-control" id="joinCode" aria-describedby="joincode" placeholder="The room Identifier">
             </div>
 
             <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Create!</button>
+              <button name="joinbtn" type="button" class="btn btn-primary">Create!</button>
             </div>
             </form>
           </div>
