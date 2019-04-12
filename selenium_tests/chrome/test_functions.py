@@ -100,6 +100,20 @@ def createRoom(topic, question):
     topicField.send_keys(question)
     time.sleep(1)
     createButton.click()
+    time.sleep(2)
+
+def delete_account(email, password, driver:
+    profilelink = driver.find_element_by_link_text('My Profile')
+    profilelink.click()
+    deleteacc = driver.find_element_by_name('deleteacc')
+    deleteacc.click()
+    delemail = driver.find_element_by_id('id_del_email')
+    delpassword = driver.find_element_by_id('id_delpassword')
+    delemail.send_keys(email)
+    delpassword.send_keys(password)
+    time.sleep(1)
+    submitdel=driver.find_element_by_id('submitdel')
+    submitdel.click()
     time.sleep(1)
 
 #def joinRoom(roomname, roomID):
