@@ -30,3 +30,5 @@ templates/.DS_Store
 accounts/migrations/__pycache__/0001_initial.cpython-37.pyc
 accounts/migrations/__pycache__/__init__.cpython-37.pyc
 cloud_sql_proxy
+cloud_sql_proxy_x64.exe
+cloud_sql_proxy.exe
