@@ -5,12 +5,6 @@ from selenium import webdriver
 #If user does not exist, they should be registered prior to creation.
 #Username is Login_test, password is Login_pass
 
-def generateTestEmail():
-    timestamp = time.time()
-    timestring = str(timestamp)
-    email = timestring + 'test@test.123'
-    return email
-
 def login(username, password, driver):
     login_link = driver.find_element_by_link_text('login')
     login_link.click()

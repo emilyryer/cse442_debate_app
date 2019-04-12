@@ -8,7 +8,7 @@ driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in
 driver.get('https://zippy-hold-232119.appspot.com/');
 time.sleep(1)
 
-email = test_functions.generateTestEmail()
+email = 'email1@test.123'
 test_functions.register(email, 'Reg_test', 'Reg_pass', driver)
 test_functions.logout(driver)
 test_functions.login(email, 'Reg_pass', driver)
