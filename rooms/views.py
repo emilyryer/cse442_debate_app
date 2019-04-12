@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.views import generic
 from django.http import Http404
-import rooms
+from .rooms import *
 
 
 
@@ -13,7 +13,7 @@ def room_render(request, roomName):
   labels = room.labels
   joincode = int(labels[join-code])
   
-    context = {'roomName':roomName,'joinCode':joincode}
+  context = {'roomName':roomName,'joinCode':joincode}
   if room == None:
       raise Http404("Room with this room name does not exist.")
   else:
@@ -50,6 +50,6 @@ def join(request):
           ussername = request.user.nickName
           roomName = request.POST.get('roomname')
           roomID = request.POST.get('id')
-          room = join_room(roomName, roomID)
+          room = rooms.join_room(roomName, roomID)
           if room: #Something was returned, meaning we have been given a room.
             return redirect("/room/"+roomName+"/")
