@@ -1,13 +1,17 @@
 import rooms
+import pytest
 
-def response_test():
+def test_answer():
+    assert 1 == 5
+
+def test_response():
     assert response_test() == 'Main Page'
 
-def create_room_test():
+def test_create_room():
     assert 1 == 0
 
-def join_room_test():
+def test_join_room():
     assert 1 == 0
 
-def delete_room_test():
+def test_delete_room():
     assert 1 == 0
