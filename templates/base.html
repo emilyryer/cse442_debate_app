@@ -93,9 +93,6 @@
             <form action="#" method="POST">{% csrf_token %}
             <div class="modal-header">
               <h5 class="modal-title" id="roomModalLabel">Create a Room</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body">
             <div class="form-group">
@@ -128,9 +125,6 @@
             <form action="#" method=get>
             <div class="modal-header">
               <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body">
             <div class="form-group">
@@ -146,7 +140,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button name="joinbtn" type="button" class="btn btn-primary">Create!</button>
+              <button id="joinbtn" type="button" class="btn btn-primary">Join!!</button>
             </div>
             </form>
           </div>
