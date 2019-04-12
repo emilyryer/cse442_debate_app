@@ -81,7 +81,7 @@ def register(email, username, password, driver):
 
     time.sleep(2)
 
-def createRoom(topic, question):
+def createRoom(topic, question, driver):
     createButton = driver.find_element_by_link_text('Create Room')
     createButton.click()
     time.sleep(1)
@@ -93,8 +93,8 @@ def createRoom(topic, question):
     nameField.send_keys(topic)
     topicField.send_keys(question)
     time.sleep(1)
-    createButton.click()
-    time.sleep(2)
+    #createButton.click()
+    #time.sleep(2)
 
 def delete_account(email, password, driver):
     profilelink = driver.find_element_by_link_text('My Profile')
