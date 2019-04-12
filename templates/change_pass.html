@@ -5,14 +5,14 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container">
-  <div class="jumbotron">
+  <div class="jumbotron" style="width: 600px; margin-top: 75px; margin-left: 15%;">
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
       <br>
       <div class="row justify-content-center">
-        <button class="btn btn-primary btn-lg" id="submitcpass" type="submit">Save changes</button>
-        <a style="position:relative;float:left;" class="btn btn-primary btn-lg" href="/accounts/profile">Cancel</a>
+        <button class="btn btn-success btn-lg" id="submitcpass" type="submit" style="margin-right: 20px;">Save changes</button>
+        <a style="position:relative;float:left; width:150px;" class="btn btn-danger btn-lg" href="/accounts/profile">Cancel</a>
       </div>
     </form><br>
   </div>
