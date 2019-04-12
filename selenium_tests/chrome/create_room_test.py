@@ -11,4 +11,5 @@ test_functions.register(email, 'create_test', 'create_pass', driver)
 
 test_functions.createRoom('Test', 'Test Question')
 
+test_functions.delete_account(email, 'create_pass', driver)
 driver.quit() #terminates program

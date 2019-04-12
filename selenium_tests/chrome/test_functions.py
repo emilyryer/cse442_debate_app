@@ -102,7 +102,7 @@ def createRoom(topic, question):
     createButton.click()
     time.sleep(2)
 
-def delete_account(email, password, driver:
+def delete_account(email, password, driver):
     profilelink = driver.find_element_by_link_text('My Profile')
     profilelink.click()
     deleteacc = driver.find_element_by_name('deleteacc')

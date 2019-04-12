@@ -12,7 +12,6 @@ email = test_functions.generateTestEmail()
 test_functions.register(email, 'Reg_test', 'Reg_pass', driver)
 test_functions.logout(driver)
 test_functions.login(email, 'Reg_pass', driver)
-test_functions.logout(driver);
 
-
+test_functions.delete_account(email, 'Reg_pass', driver)
 driver.quit()
