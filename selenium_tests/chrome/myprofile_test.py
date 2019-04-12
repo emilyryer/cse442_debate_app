@@ -7,7 +7,7 @@ import test_functions
 #Email is test@test.123, Username is Login_test, password is Login_pass
 
 driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in the selenium_tests/chrome folder
-driver.get('http://127.0.0.1:8000/');
+driver.get('https://zippy-hold-232119.appspot.com/');
 time.sleep(1)
 
 email = 'hello@123.hello'
@@ -39,16 +39,7 @@ submitButton = driver.find_element_by_id('submitcuser')
 submitButton.click()
 time.sleep(1)
 
-deleteacc = driver.find_element_by_name('deleteacc')
-deleteacc.click()
-delemail = driver.find_element_by_id('id_del_email')
-delpassword = driver.find_element_by_id('id_delpassword')
-delemail.send_keys(email)
-delpassword.send_keys('Prof_pass1')
-time.sleep(1)
-submitdel=driver.find_element_by_id('submitdel')
-submitdel.click()
-time.sleep(1)
+test_functions.delete_account(email, 'Prof_pass1', driver)
 
 test_functions.login(email, 'Prof_pass1', driver)
 

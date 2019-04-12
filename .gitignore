@@ -1,5 +1,7 @@
 app.yaml
 rooms/creds.json
+cloud_sql_proxy_x64.exe
+cloud_sql_proxy.exe
 accounts/__pycache__/__init__.cpython-36.pyc
 accounts/__pycache__/__init__.cpython-37.pyc
 accounts/__pycache__/admin.cpython-36.pyc

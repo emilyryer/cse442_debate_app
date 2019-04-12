@@ -5,13 +5,6 @@ from selenium import webdriver
 #If user does not exist, they should be registered prior to creation.
 #Username is Login_test, password is Login_pass
 
-def generateTestEmail():
-    timestamp = time.time()
-    timestring = str(timestamp)
-    email = timestring + 'test@test.123'
-    return email
-
-
 def login(username, password, driver):
     login_link = driver.find_element_by_link_text('login')
     login_link.click()
@@ -87,3 +80,34 @@ def register(email, username, password, driver):
         driver.quit()
 
     time.sleep(2)
+
+def createRoom(topic, question):
+    createButton = driver.find_element_by_link_text('Create Room')
+    createButton.click()
+    time.sleep(1)
+
+    nameField = driver.find_element_by_id('roomName')
+    topicField = driver.find_element_by_id('roomTopic')
+    createButton = driver.find_element_by_id('createButton')
+
+    nameField.send_keys(topic)
+    topicField.send_keys(question)
+    time.sleep(1)
+    createButton.click()
+    time.sleep(2)
+
+def delete_account(email, password, driver):
+    profilelink = driver.find_element_by_link_text('My Profile')
+    profilelink.click()
+    deleteacc = driver.find_element_by_name('deleteacc')
+    deleteacc.click()
+    delemail = driver.find_element_by_id('id_del_email')
+    delpassword = driver.find_element_by_id('id_delpassword')
+    delemail.send_keys(email)
+    delpassword.send_keys(password)
+    time.sleep(1)
+    submitdel=driver.find_element_by_id('submitdel')
+    submitdel.click()
+    time.sleep(1)
+
+#def joinRoom(roomname, roomID):

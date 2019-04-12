@@ -71,17 +71,16 @@
             <div class="modal-body">
             <div class="form-group">
               <label for="roomTopic">Room Topic</label>
-              <input type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The Room Topic">
+              <input name="createTopic" type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The room topic">
             </div>
             <div class="form-group">
-              <label for="roomName">Debate Question</label>
-              <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The Debate Question">
+              <label for="roomName">Room Name</label>
+              <input name="createName" type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The room name">
             </div>
-            <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="createButton">Create!</button>
+              <button name="createbtn"   type="button" class="btn btn-primary">Create!</button>
             </div>
             </form>
           </div>
@@ -97,7 +96,7 @@
         <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <form>
+            <form action="#" method=get>
             <div class="modal-header">
               <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -114,7 +113,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Create!</button>
+              <button name="joinbtn" type="button" class="btn btn-primary">Create!</button>
             </div>
             </form>
           </div>

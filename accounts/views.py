@@ -12,6 +12,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import update_session_auth_hash
 from accounts.models import User
 from django.contrib import messages
+from rooms import rooms
+from rooms import views
 
 
 def signup(request):
@@ -84,3 +86,21 @@ def profile(request):
         return render(request, 'delete_acc.html', {'form': form})
 
     return render(request, 'profile.html')
+
+def request_page(request):
+  if(request.GET.get('createbtn')):
+    if(request.user.is_authenticated()):
+      username = user.nicName()
+      roomName = request.GET.get('createName')
+      roomTopic = request.GET.get('createTopic')
+      createStatus = rooms.create_room(roomName, roomTopic, user)
+      if(createStatus.startswith('Unable')): #Unable to make bucket
+        #TODO: Handle error
+        return 0
+      elif(createStatus.startswith('Bucket')): #Bucket already exists
+        #TODO: Handle error
+        return 0
+      elif(createStatus.startswith('NEW')): #NEW BUCKET CREATED
+        return rooms.views.room_render(request, roomTopic)
+      else: # Undefined behavior
+        return 0
