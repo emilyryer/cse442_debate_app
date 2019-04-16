@@ -4,6 +4,12 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+{% for message in messages %}
+<div class="alert alert-danger">
+  <a class="close" href="#" data-dismiss="alert">×</a>
+  {{ message }}
+</div>
+{% endfor %}
 <div class="container">
   <div class="jumbotron" style="width: 600px; margin-top: 75px; margin-left: 15%;">
     <form method="post">
