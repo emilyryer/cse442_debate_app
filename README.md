@@ -16,7 +16,7 @@
 
 ### Deployed App Link
 
-Coming Soon!
+https://zippy-hold-232119.appspot.com/
 
 ### Tools Used
 * Login: Django
@@ -27,8 +27,4 @@ Coming Soon!
 
 * Front-end CSS Design: Bootstrap
 
-<<<<<<< HEAD
 * Testing: Selinium
-=======
-* Testing: Selenium
->>>>>>> d670241a54b042851e6184769a7237ffa437718d
