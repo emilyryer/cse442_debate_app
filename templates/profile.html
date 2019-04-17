@@ -3,29 +3,45 @@
 {% block title %}My Profile{% endblock %}
 
 {% block content %}
+<head>
+  <style>
+    h1 { color: #005bbb; }
+
+    #myprof_row {
+      margin: 40px;
+    }
+
+    #myprof_button {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
 {% if user.is_authenticated %}
 {% csrf_token %}
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="jumbotron" style="width: 700px; margin-top: 75px; margin-left: 15%;">
+  <div class="row justify-content-center" >
     <h1>{{ user.nickName }}</h1>
   </div>
   <div class="row justify-content-center">
     <h1>{{ user.email }}</h1>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" style="margin-top: 75px;" id="myprof_row">
     <form method="get">
-      <button type="submit" value="Click" name="cpass">Change Password</button>
+      <button style="position:relative;float:;" class="btn btn-primary btn-lg" type="submit" value="Click" name="cpass">Change Password</button>
     </form>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" id="myprof_row">
     <form method="get">
-      <button type="submit" value="Click" name="cuser">Change Username</button>
+      <button style="position:relative;float:;" class="btn btn-primary btn-lg" type="submit" value="Click" name="cuser">Change Username</button>
     </form>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" id="myprof_row">
     <form method="get">
-      <button type="submit" value="Click" name="deleteacc">Delete Account</button>
+      <button style="position:relative;float:;" class="btn btn-danger btn-lg" type="submit" value="Click" name="deleteacc" id="myprof_button">Delete Account</button>
     </form>
+  </div>
   </div>
 </div>
 {% else %}
