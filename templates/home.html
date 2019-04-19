@@ -4,6 +4,23 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<head>
+  <style>
+    .btn{
+        background-color: #005bbb;
+        border: 2px solid #ffffff;
+        width: 15%;
+        color: #ffffff;
+    }
+    .btn:hover,
+    .btn:focus {
+      background-color: #002f56;
+      color:  #ffffff;
+      border: 2px solid #002f56;
+    }
+
+  </style>
+</head>
 {% if user.is_authenticated %}
 <div class="container">
   <div class="jumbotron">
@@ -30,8 +47,18 @@
   </div>
 </div>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
-  <a href="{% url 'signup' %}">register</a>
+
+<body style="background: #005bbb;">
+  <div class="container" style="display: flex; align-items: center; justify-content: center ">
+    {% load static %}
+      <img src="{% static 'accounts/logo.png' %}" alt="logo" style="height: 50%; width: 50%;">
+  </div>
+  <div class="row justify-content-center" style="margin-top: -3%;">
+    <a href="{% url 'login' %}" role="button" class="btn">Login</a>
+  </div>
+  <div class="row justify-content-center" style="margin-top: 1.5%;">
+    <a href="{% url 'signup' %}" role="button" class="btn">Register</a>
+  </div>
+</body>
 {% endif %}
 {% endblock %}

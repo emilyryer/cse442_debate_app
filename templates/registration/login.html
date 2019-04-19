@@ -1,6 +1,32 @@
  {% extends 'base.html' %}
 
 {% block content %}
+<head>
+  <style>
+    body{
+
+    }
+    .btn{
+        background-color: #005bbb;
+        border: 2px solid #005bbb;
+        color: #ffffff;
+    }
+    .btn:hover,
+    .btn:focus {
+      background-color:  #002f56;
+      color:  #ffffff;
+      border: 2px solid #002f56;
+    }
+    .jumbotron{
+      width: 50%;
+      margin-left:20%;
+      margin-top: 5%;
+
+    }
+
+
+  </style>
+</head>
 {% if form.errors %}
 <div class="alert alert-danger">
   <a class="close" href="#" data-dismiss="alert">×</a>
@@ -21,7 +47,7 @@
         {{ field }}
       </div>
       {% endfor %}
-    <button style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit">Login</button>
+    <button style="position:relative;float:right;" class="btn" type="submit">Login</button>
     </form>
   </div>
 </div>

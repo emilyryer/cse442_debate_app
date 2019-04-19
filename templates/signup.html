@@ -5,9 +5,36 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
+<head>
+  <style>
+    body{
+
+    }
+    .btn{
+        background-color: #005bbb;
+        border: 2px solid #005bbb;
+        color: #ffffff;
+    }
+    .btn:hover,
+    .btn:focus {
+      background-color:  #002f56;
+      color:  #ffffff;
+      border: 2px solid #002f56;
+    }
+    .jumbotron{
+      width: 50%;
+      margin-left:20%;
+      margin-top: 5%;
+
+    }
+
+
+  </style>
+</head>
+
 <div class="container">
-  <div class="jumbotron">
-    <h1>Create an Account</h1>
+  <div class="jumbotron justify-content-center">
+    <h1 style="color: #002f56; margin-bottom: 25px;">Create an Account</h1>
       <form method="post">
         {% csrf_token %}
         {% for field in form %}
@@ -19,7 +46,7 @@
           {% endfor %}
         </div>
         {% endfor %}
-        <button style="position:relative;float:right;" class="btn btn-primary btn-lg" type="submit">Sign up</button>
+        <button style="position:relative;float:right;" class="btn" type="submit">Sign up</button>
       </form>
  </div>
 </div>

@@ -17,14 +17,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
  <style>
     .navbar {
-      background-color: #005bbb; /*The Official UB Blue*/
-      color: #ffffff;
+      background-color:  #002f56; /*alt blue*/
+      color: #005bbb; /*The Official UB Blue*/
+
+
     }
     .navbar li a, .navbar .navbar-brand {
       color: #ffffff;
     }
     .nav-item {
-      color: #ffffff
+      color: #ffffff;
     }
     body {
       background-color: #F3F3F3;
@@ -48,10 +50,11 @@
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
      </button>
+     {% if user.is_authenticated %}
    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
      <div class="navbar-nav">
        <a class="nav-item nav-link" href=""><b>Room</b> {{current_code}} </a>
-       {% if user.is_authenticated %}
+
         <!-- Button trigger modal -->
         <a class ="nav-item nav-link" data-toggle="modal" data-target="#roomModal">
           <b>Create Room </b>
