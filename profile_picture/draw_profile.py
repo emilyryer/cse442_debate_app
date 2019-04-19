@@ -19,8 +19,8 @@ def draw_profile_pic(name, red, green, blue):
     img.save(name + '.png')
 
 #Test Cases (Uncomment to run)
-#draw_profile_pic('A', 0, 0, 0)
-#draw_profile_pic('BBBB', 255,255,255)
-#draw_profile_pic('CCCCC', 127, 44, 67)
-#draw_profile_pic('DDDD', 81, 22, 67)
-#draw_profile_pic('EEEEE', 201, 199, 240)
+draw_profile_pic('A', 0, 0, 0) #Test case for length one, black background. Letter should be white.
+draw_profile_pic('BBBB', 255,255,255) #Test case for white background. Letter should be black.
+draw_profile_pic('CCCCC', 127, 44, 67) #Test case for medium-light background. Letter should be white.
+draw_profile_pic('DDDD', 81, 22, 67) #Test case for darker background. Letter should be white.
+draw_profile_pic('EEEEE', 201, 199, 240) #Test case for lighter background. Letter should be black
