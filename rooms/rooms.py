@@ -1,12 +1,14 @@
 import logging
 import random
+import comments
 
 from google.cloud import (storage, exceptions)
 
-client = storage.Client.from_service_account_json('creds.json')
-logging.basicConfig(filename='room.log', level='INFO', format='w')
+# client = storage.Client.from_service_account_json('creds.json')
+logging.basicConfig(filename='rooms.log', level='INFO', format='w')
 
 def create_room(room_name='default', topic='', user='unknown'):
+    storage_client = storage.Client()
     if user == '' or user == 'unknown':
         logging.error('No username given')
     new_bucket_name = room_name + '-' + user
@@ -26,6 +28,7 @@ def create_room(room_name='default', topic='', user='unknown'):
     add_bucket_label(new_bucket_name, 'join-code', random.randint(1000, 9999))
 
     create_room_users(user, new_bucket)
+    create_comment_trees(new_bucket)
 
     logging.info('NEW BUCKET CREATED: {0}\nOWNER: {1}\nTOPIC: {2}'.format(
                 new_bucket_name, user, topic))
