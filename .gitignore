@@ -1,5 +1,7 @@
 app.yaml
 rooms/creds.json
+rooms/__pycache__/*
+rooms/*.log
 accounts/__pycache__/__init__.cpython-36.pyc
 accounts/__pycache__/__init__.cpython-37.pyc
 accounts/__pycache__/admin.cpython-36.pyc
