@@ -4,7 +4,6 @@ import comments
 
 from google.cloud import (storage, exceptions)
 
-# client = storage.Client.from_service_account_json('creds.json')
 logging.basicConfig(filename='rooms.log', level='INFO', format='w')
 
 def create_room(room_name='default', topic='', user='unknown'):
