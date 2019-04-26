@@ -27,4 +27,4 @@ https://zippy-hold-232119.appspot.com/
 
 * Front-end CSS Design: Bootstrap
 
-* Testing: Selinium
+* Testing: Selenium
