@@ -4,7 +4,7 @@
 <head>
   <style>
     body{
-
+      background: #005bbb;
     }
     .btn{
         background-color: #005bbb;
@@ -18,10 +18,17 @@
       border: 2px solid #002f56;
     }
     .jumbotron{
-      width: 50%;
-      margin-left:20%;
+      width: 40%;
+      margin-left: auto;
+      margin-right: auto;
       margin-top: 5%;
-
+      margin-bottom: 0px;
+      background: #ffffff;
+      color: #002f56;
+      padding-top: 4rem;
+      padding-right: 2rem;
+      padding-bottom: 1rem;
+      padding-left: 2rem;
     }
 
 
@@ -36,19 +43,24 @@
   </p>
 </div>
 {% endif %}
-<div class="container">
+<div class="container" style="display: flex; align-items: center;">
   <div class="jumbotron">
-    <h1> Welcome Back!</h1>
+    <h1 style="margin-bottom: 30px; margin-top: -10px;"> Welcome Back!</h1>
     <form method="post">
       {% csrf_token %}
       {% for field in form %}
-      <div>
+      <div style="margin: 2%;">
         {{ field.label_tag }}<br>
-        {{ field }}
+        {{ field }}<br>
       </div>
       {% endfor %}
-    <button style="position:relative;float:right;" class="btn" type="submit">Login</button>
+      <div class="row">
+        <button style="margin-left: 5%; margin-top: 2%; width: 54%;" class="btn" type="submit">Login</button>
+      </div>
     </form>
+    <div class="row" style="margin-top: 10%;">
+      <a href="{% url 'signup' %}" style="margin: 2%; margin-bottom: 0px; color: #002f56;">Don't have an account? Register here.</a>
+    </div>
   </div>
 </div>
 {% endblock %}
