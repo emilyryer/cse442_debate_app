@@ -33,10 +33,15 @@ def profile(request):
         if request.method == 'POST':
             form = PasswordChangeForm(user=request.user, data=request.POST)
             if form.is_valid():
-                user = form.save()
-                update_session_auth_hash(request, user)
-                messages.success(request, 'Your password was successfully updated!')
-                return redirect('/accounts/profile')
+                oldpass = form.cleaned_data['old_password']
+                newpass = form.cleaned_data['new_password1']
+                if (oldpass == newpass):
+                    print(form.error_messages)
+                    messages.error(request, 'You cant use your old password')
+                else:
+                    user = form.save()
+                    update_session_auth_hash(request, user)
+                    return redirect('/accounts/profile')
             else:
                 print(form.error_messages)
                 messages.error(request, 'Please correct the error below.')

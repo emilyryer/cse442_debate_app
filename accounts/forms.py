@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
         self.fields['nickName'].label = "Username"
 
 class NewName(forms.Form):
-    new_username = forms.CharField(max_length = 20, widget=forms.TextInput(attrs={'type':'password', 'placeholder':'New username',  'class' : 'span'}))
+    new_username = forms.CharField(max_length = 20, widget=forms.TextInput(attrs={'type':'username', 'placeholder':'New username',  'class' : 'span'}))
 
     def __init__(self, *args, **kwargs):
         super(NewName, self).__init__(*args, **kwargs)
@@ -30,5 +30,3 @@ class DeleteAcc(forms.Form):
         super(DeleteAcc, self).__init__(*args, **kwargs)
         self.fields['del_email'].label = "Email"
         self.fields['delpassword'].label = "Password"
-
-    
