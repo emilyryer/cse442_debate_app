@@ -3,13 +3,13 @@ import random
 
 from google.cloud import (storage, exceptions)
 
-client = storage.Client.from_service_account_json('creds.json')
 logging.basicConfig(filename='room.log', level='INFO', format='w')
 
 def response():
     return 'Main page'
 
 def create_room(room_name='default', topic='', user='unknown'):
+    storage_client = storage.Client()
     if user == '' or user == 'unknown':
         logging.warning('No username given')
     new_bucket_name = room_name + '-' + user

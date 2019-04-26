@@ -3,6 +3,17 @@
 {% block title %}Change Password{% endblock %}
 
 {% block content %}
+<head>
+  <style>
+
+    .btn:hover,
+    .btn:focus {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+  </style>
+</head>
+
 {% if user.is_authenticated %}
 {% for message in messages %}
 <div class="alert alert-danger">
@@ -12,25 +23,25 @@
 {% endfor %}
 <div class="container">
   <div class="jumbotron">
-  <h3> Are you sure you want to delete your account? Enter your credentials to confirm.</h3><br>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      {{ field.label_tag }}<br>
-      {{ field }}<br><br>
-      {% for error in field.errors %}
-      <p style="color: red">{{ error }}</p>
+    <h3> Are you sure you want to delete your account? Enter your credentials to confirm.</h3><br>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        {{ field.label_tag }}<br>
+        {{ field }}<br><br>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
       {% endfor %}
-    {% endfor %}
-    <br>
-    <div class="row justify-content-center">
-      <button style="position:relative;float:right; margin-right: 20px;" class="btn btn-success btn-lg" id="submitdel" type="submit">Submit</button>
-      <a style="position:relative;float:right;" class="btn btn-danger btn-lg" href="/accounts/profile">Cancel</a>
-    </div>
-  </form>
+      <br>
+      <div class="row justify-content-center">
+        <button style="position:relative;float:right; margin-right: 20px;" class="btn btn-success btn-lg" id="submitdel" type="submit">Submit</button>
+        <a style="position:relative;float:right;" class="btn btn-danger btn-lg" href="/accounts/profile">Cancel</a>
+      </div>
+    </form>
+  </div>
 </div>
-</div>
-  {% else %}
+{% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
   <a href="{% url 'signup' %}">register</a>

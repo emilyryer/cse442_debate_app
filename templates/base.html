@@ -9,131 +9,143 @@
 
   <!-- This file only CSS -->
 
-{% endblock %}
+  {% endblock %}
 <!-- Bootstrap and navbar-specific pages are not in block head, so they may work on all sites which have the navbar.-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- <style>
-    .navbar {
-      background-color:  #002f56; /*alt blue*/
-      color: #005bbb; /*The Official UB Blue*/
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
 
+      .navbar {
+        background-color:#002f56;  /*alt blue*/
+        color: #005bbb; /*The Official UB Blue*/
+      }
+      .navbar li a, .navbar .navbar-brand {
+        color: #ffffff;
+        text-align: right;
+      }
+      .nav-item {
+        color: #ffffff;
+      }
 
-    }
-    .navbar li a, .navbar .navbar-brand {
-      color: #ffffff;
-    }
-    .nav-item {
-      color: #ffffff;
-    }
-    body {
-      background-color: #F3F3F3;
-      height: 100%;
-    }
-    .row{
-      margin-top: 20px;
-    }
-    .jumbotron{
-      margin-top: 20px;
-    }
+      .row{
+        margin-top: 20px;
+      }
+      .jumbotron{
+        margin-top: 20px;
+      }
+      h6{
+        margin-top: 0%;
+        padding-right: 10px;
+        padding-top: 10px;
+        color: LightGray;
+      }
+      .navbar-brand:hover,
+      .navbar-brand:focus {
+        color: white;
+        border-bottom: 1px solid white;
+
+      }
+      a.nav-item:hover,
+      a.nav-item:focus{
+        color: white;
+        border-bottom: 1px solid white;
+      }
+      form{
+        color: #002f56;
+      }
+      #roomModalLabel{
+      }
+      #createButton{
+          width: 20%;
+      }
+      #joinButton{
+          width: 20%;
+      }
+
   </style>
   <meta charset="utf-8">
   <title>{% block title %}Debate App{% endblock %}</title>
 </head>
 
-
+ {% if user.is_authenticated %}
 <body>
   <nav class="navbar navbar-expand-lg">
    <a class="navbar-brand" href="/">Debate Central</a>
+   <h6 class="align-middle">Hello, {{ user.nickName }}!</h6>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-     </button>
-     {% if user.is_authenticated %}
+     <span class="navbar-toggler-icon"></span>
+   </button>
    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
      <div class="navbar-nav">
-       <a class="nav-item nav-link" href=""><b>Room</b> {{current_code}} </a>
-
-        <!-- Button trigger modal -->
-        <a class ="nav-item nav-link" data-toggle="modal" data-target="#roomModal">
-          <b>Create Room </b>
-        </a>
-
         <!-- Modal -->
         <div class="modal fade" id="roomModal" tabindex="-1" role="dialog" aria-labelledby="roomModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <form>
-            <div class="modal-header">
-              <h5 class="modal-title" id="roomModalLabel">Create a Room</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form>
+                <div class="modal-header">
+                  <h5 class="modal-title" id="roomModalLabel">Create a Room</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="roomTopic">Room Topic</label>
+                    <input type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The Room Topic">
+                  </div>
+                  <div class="form-group">
+                    <label for="roomName">Debate Question</label>
+                    <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The Debate Question">
+                  </div>
+                  <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn" id="createButton">Create!</button>
+                </div>
+              </form>
             </div>
-            <div class="modal-body">
-            <div class="form-group">
-              <label for="roomTopic">Room Topic</label>
-              <input type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The Room Topic">
-            </div>
-            <div class="form-group">
-              <label for="roomName">Debate Question</label>
-              <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The Debate Question">
-            </div>
-            <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="createButton">Create!</button>
-            </div>
-            </form>
           </div>
         </div>
-        </div>
         <!-- End Modal -->
-         <!-- Button trigger modal -->
-        <a class ="nav-item nav-link" data-toggle="modal" data-target="#joinModal">
-          <b>Join Room </b>
-        </a>
-
         <!-- Modal -->
         <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <form>
-            <div class="modal-header">
-              <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form>
+                <div class="modal-header">
+                  <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="roomId">Room ID</label>
+                    <input type="text" class="form-control" id="roomID" aria-describedby="joinID" placeholder="The room Identifier">
+                  </div>
+                  <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
+                </div>
+                <div class="modal-footer">
+                  <button id="joinButton" type="button" class="btn">Create!</button>
+                </div>
+              </form>
             </div>
-            <div class="modal-body">
-            <div class="form-group">
-              <label for="roomId">Room ID</label>
-              <input type="text" class="form-control" id="roomID" aria-describedby="joinID" placeholder="The room Identifier">
-            </div>
-
-            <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Create!</button>
-            </div>
-            </form>
           </div>
         </div>
-        </div>
         <!-- End Modal -->
-       <a class="nav-item nav-link" href="/accounts/profile">My Profile</a>
-       <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-        {% else %}
-       <a class="nav-item nav-link" href="/accounts/login">Login</a>
-       <a class="nav-item nav-link" href="/accounts/signup">Register</a>  {% endif %}
      </div>
+      <ul class="nav navbar-nav ml-auto">
+        <a class="nav-item nav-link" href="/accounts/profile">My Profile</a>
+        <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+      </ul>
    </div>
  </nav>
+    {% else %}
+    {% endif %}
   <main>
-    {% block content %}
+   {% block content %}
     {% endblock %}
   </main>
 </body>
