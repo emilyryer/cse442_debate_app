@@ -1,26 +1,41 @@
 from PIL import Image, ImageDraw, ImageFont
+import tkinter as tk
+import tkinter.ttk as ttk
+from tkcolorpicker import askcolor
 #Install Pillow with pip install pillow
 
-def draw_profile_pic(name, red, green, blue):
+def draw_profile_pic(name):
     initial = ''
     if len(name) == 1:
         initial = name
     else:
         initial = name[0]
 
-    img = Image.new('RGB', (500, 500), color = (red, green, blue))
+    root = tk.Tk()
+    style = ttk.Style(root)
+    style.theme_use('clam')
+
+    colorTuple = askcolor((255, 255, 0), root)
+    colorString = "{}".format(colorTuple[0])
+    colorList = colorString.split(", ")
+    red=colorList[0].strip('(')
+    green=colorList[1]
+    blue=colorList[2].strip(')')
+
+    redInt = int(red)
+    greenInt = int(green)
+    blueInt = int(blue)
+
+    img = Image.new('RGB', (500, 500), color = (redInt, greenInt, blueInt))
 
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("fonts/DODGE.ttf", 400)
     textRGB = 0
-    if (red + green + blue) < 450:
+    if (redInt + greenInt + blueInt) < 450:
         textRGB = 255
     draw.text((120,40),initial,(textRGB,textRGB,textRGB),font=font)
     img.save(name + '.png')
 
 #Test Cases (Uncomment to run)
-draw_profile_pic('A', 0, 0, 0) #Test case for length one, black background. Letter should be white.
-draw_profile_pic('BBBB', 255,255,255) #Test case for white background. Letter should be black.
-draw_profile_pic('CCCCC', 127, 44, 67) #Test case for medium-light background. Letter should be white.
-draw_profile_pic('DDDD', 81, 22, 67) #Test case for darker background. Letter should be white.
-draw_profile_pic('EEEEE', 201, 199, 240) #Test case for lighter background. Letter should be black
+draw_profile_pic('A') #case for single letter nickName
+draw_profile_pic('BBBB') #case for multiple letter nickname
