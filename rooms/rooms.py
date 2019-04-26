@@ -5,9 +5,6 @@ from google.cloud import (storage, exceptions)
 
 logging.basicConfig(filename='room.log', level='INFO', format='w')
 
-def response():
-    return 'Main page'
-
 def create_room(room_name='default', topic='', user='unknown'):
     storage_client = storage.Client()
     if user == '' or user == 'unknown':
