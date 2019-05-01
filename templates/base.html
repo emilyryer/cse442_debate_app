@@ -78,76 +78,17 @@
      <span class="navbar-toggler-icon"></span>
    </button>
    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-     <div class="navbar-nav">
-        <!-- Modal -->
-        <div class="modal fade" id="roomModal" tabindex="-1" role="dialog" aria-labelledby="roomModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <form>
-                <div class="modal-header">
-                  <h5 class="modal-title" id="roomModalLabel">Create a Room</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label for="roomTopic">Room Topic</label>
-                    <input type="text" class="form-control" id="roomTopic" aria-describedby="createTopic" placeholder="The Room Topic">
-                  </div>
-                  <div class="form-group">
-                    <label for="roomName">Debate Question</label>
-                    <input type="text" class="form-control" id="roomName" aria-describedby="createTopic" placeholder="The Debate Question">
-                  </div>
-                  <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn" id="createButton">Create!</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <!-- End Modal -->
-        <!-- Modal -->
-        <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <form>
-                <div class="modal-header">
-                  <h5 class="modal-title" id="joinModalLabel">Join a Room</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group">
-                    <label for="roomId">Room ID</label>
-                    <input type="text" class="form-control" id="roomID" aria-describedby="joinID" placeholder="The room Identifier">
-                  </div>
-                  <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
-                </div>
-                <div class="modal-footer">
-                  <button id="joinButton" type="button" class="btn">Create!</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <!-- End Modal -->
-     </div>
       <ul class="nav navbar-nav ml-auto">
         <a class="nav-item nav-link" href="/accounts/profile">My Profile</a>
         <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
       </ul>
    </div>
  </nav>
-    {% else %}
-    {% endif %}
+  {% else %}
+  {% endif %}
   <main>
    {% block content %}
-    {% endblock %}
+   {% endblock %}
   </main>
 </body>
-
 </html>

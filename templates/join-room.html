@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Debate Room{% endblock %}
+
+{% block content %}
+  <style>
+
+
+  </style>
+
+{% if user.is_authenticated %}
+{% csrf_token %}
+{{ room_id }}
+	<div class="row">
+    <div class="col-sm-6">
+      <div class="well well-lg">
+        <h4>Agree</h4>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="well well-lg">
+        <h4>Disagree</h4>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <p>agree comments</p>
+    </div>
+    <div class="col-sm-6">
+      <p>disagree comments</p>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
