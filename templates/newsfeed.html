@@ -39,18 +39,24 @@
 {% if user.is_authenticated %}
 {% csrf_token %}
 <div class="row">
-  <div class="col-6">
+  <div class="col-12">
     <div class="well">
       <xml Id = news>
-      <Newsfeed>
-        <body> https://news.google.com/news/rss </body>
-      </NewsFeed>
+        <Newsfeed>
+          <body> https://news.google.com/news/rss </body>
+        </NewsFeed>
+      </xml>
     </div>
   </div>
-  <div class="col-6">
+</div>
+<br>
+<div class = "row">
+  <div class="col-12">
     <div class="well">Your selected article: </div>
   </div>
 </div>
+<br>
+<div class = "well">
       <form>
           <h5 class="modal-title" id="roomModalLabel">Create a Room Based on Your Article</h5>
           <div class="form-group">
@@ -64,5 +70,6 @@
           <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
           <button type="button" class="btn" id="createButton">Create!</button>
       </form>
+</div>
 {% endif %}
 {% endblock %}
