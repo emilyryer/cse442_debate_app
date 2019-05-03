@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}NewsFeed{% endblock %}
+
+{% block content %}
+
+<head>
+  <style>
+
+    body{
+      background-color:  #005bbb;
+      height: 100%;
+      margin: 0;
+    }
+    .btn{
+        background-color: #002f56;
+        border: 2px solid #002f56;
+        color: #ffffff;
+    }
+    .btn:hover,
+    .btn:focus {
+      background-color:  #002f56;
+      color:  #ffffff;
+      border: 2px solid #002f56;
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+    .well{
+     position: absolute;
+      background-color:#005bbb;
+      color:#FFFFFF;
+    }
+    .row{
+      margin: 5%;
+    }
+
+  </style>
+</head>
+
+{% if user.is_authenticated %}
+{% csrf_token %}
+<div class="row">
+  <div class="col-6">
+    <div class="well">Google newsfeed (will use this rss link: https://news.google.com/news/rss)</div>
+  </div>
+  <div class="col-6">
+    <div class="well">Your selected article: </div>
+  </div>
+</div>
+      <form>
+          <h5 class="modal-title" id="roomModalLabel">Create a Room Based on Your Article</h5>
+          <div class="form-group">
+            <label for="roomTopic">Room Topic</label>
+            <input type="text" class="form-control" id="newsRoomTopic" aria-describedby="createTopic" placeholder="The Article for Debate">
+          </div>
+          <div class="form-group">
+            <label for="roomName">Debate Question</label>
+            <input type="text" class="form-control" id="newsRoomQuestion" aria-describedby="createTopic" placeholder="The Debate Question">
+          </div>
+          <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
+          <button type="button" class="btn" id="createButton">Create!</button>
+      </form>
+{% endif %}
+{% endblock %}
