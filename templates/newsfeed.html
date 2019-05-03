@@ -40,7 +40,12 @@
 {% csrf_token %}
 <div class="row">
   <div class="col-6">
-    <div class="well">Google newsfeed (will use this rss link: https://news.google.com/news/rss)</div>
+    <div class="well">
+      <xml Id = news>
+      <Newsfeed>
+        <body> https://news.google.com/news/rss </body>
+      </NewsFeed>
+    </div>
   </div>
   <div class="col-6">
     <div class="well">Your selected article: </div>
