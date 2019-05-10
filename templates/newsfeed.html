@@ -41,6 +41,7 @@
 <div class="row">
   <div class="col-12">
     <div class="well">
+      <h3>Newsfeed from Google</h3>
       <xml Id = news>
         <Newsfeed>
           <body>
@@ -54,24 +55,9 @@
 <br>
 <div class = "row">
   <div class="col-12">
-    <div class="well">Paste URL Here: </div>
+    <div class="well"><h3>Paste URL Here:</h3>
+    </div>
   </div>
-</div>
-<br>
-<div class = "well">
-      <form>
-          <h5 class="modal-title" id="roomModalLabel">Create a Room Based on Your Article</h5>
-          <div class="form-group">
-            <label for="roomTopic">Room Topic</label>
-            <input type="text" class="form-control" id="newsRoomTopic" aria-describedby="createTopic" placeholder="The Article for Debate">
-          </div>
-          <div class="form-group">
-            <label for="roomName">Debate Question</label>
-            <input type="text" class="form-control" id="newsRoomQuestion" aria-describedby="createTopic" placeholder="The Debate Question">
-          </div>
-          <hidden for="username" id="room-username" data="{{user.nickName}}"> </hidden>
-          <button type="button" class="btn" id="createButton">Create!</button>
-      </form>
 </div>
 {% endif %}
 {% endblock %}
