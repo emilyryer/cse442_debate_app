@@ -6,13 +6,10 @@ driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in
 driver.get('https://zippy-hold-232119.appspot.com/');
 time.sleep(2) # Let the user actually see something!
 
-email1 = 'email1@test.123'
-test_functions.register(email1, 'create_test1', 'create_pass1', driver)
+email = test_functions.randomEmail()
+test_functions.register(email, 'create_test', 'create_pass', driver)
 
-test_functions.createRoom('Test', 'Test Question')
+test_functions.join_room("24456", driver)
 
-#This is where we get the room ID
-
-test_functions.logout()
-email2 = 'email2@test.123'
-test_functions.register(email2, 'create_test2', 'create_pass2', driver)'
+test_functions.delete_account(email, 'create_pass', driver)
+driver.quit() #terminates program

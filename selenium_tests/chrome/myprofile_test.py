@@ -10,15 +10,28 @@ driver = webdriver.Chrome('chromedriver.exe')  # chromedriver.exe is included in
 driver.get('https://zippy-hold-232119.appspot.com/');
 time.sleep(1)
 
-email = 'hello@123.hello'
+email = test_functions.randomEmail()
 test_functions.register(email, 'Prof_test', 'Prof_pass', driver)
 
 profilelink = driver.find_element_by_link_text('My Profile')
 profilelink.click()
 time.sleep(1)
 
+#Test to show you can't enter the same password twice
 cpass = driver.find_element_by_name('cpass')
 cpass.click()
+oldPass = driver.find_element_by_name('old_password')
+newPass1 = driver.find_element_by_name('new_password1')
+newPass2 = driver.find_element_by_name('new_password2')
+oldPass.send_keys('Prof_pass')
+newPass1.send_keys('Prof_pass')
+newPass2.send_keys('Prof_pass')
+time.sleep(1)
+submitButton = driver.find_element_by_id('submitcpass')
+submitButton.click()
+time.sleep(1)
+
+#Test with new password
 oldPass = driver.find_element_by_name('old_password')
 newPass1 = driver.find_element_by_name('new_password1')
 newPass2 = driver.find_element_by_name('new_password2')

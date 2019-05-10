@@ -1,4 +1,5 @@
 import time
+import random
 from selenium import webdriver
 
 #This test requires an existing user, called Login_test
@@ -6,8 +7,7 @@ from selenium import webdriver
 #Username is Login_test, password is Login_pass
 
 def login(username, password, driver):
-    login_link = driver.find_element_by_link_text('login')
-    login_link.click()
+    driver.get('https://zippy-hold-232119.appspot.com/accounts/login/');
     time.sleep(.2)
     try:
         username_field = driver.find_element_by_name('username')
@@ -43,10 +43,14 @@ def logout(driver):
         driver.quit()
     time.sleep(2)
 
+def randomEmail():
+    randNum = random.randint(1,1000000)
+    email = str(randNum) + "@test.test"
+    return email
+
 def register(email, username, password, driver):
-    login_link = driver.find_element_by_link_text('register')
-    login_link.click()
-    time.sleep(.2)
+    driver.get('https://zippy-hold-232119.appspot.com/profile/signup/');
+
     try:
         email_field = driver.find_element_by_name('email')
     except NoSuchElementException:
@@ -86,15 +90,15 @@ def createRoom(topic, question, driver):
     createButton.click()
     time.sleep(1)
 
-    nameField = driver.find_element_by_id('roomName')
-    topicField = driver.find_element_by_id('roomTopic')
-    createButton = driver.find_element_by_id('createButton')
+    nameField = driver.find_element_by_id('room_topic')
+    topicField = driver.find_element_by_id('room_name')
+    createButton = driver.find_element_by_id('create_button')
 
     nameField.send_keys(topic)
     topicField.send_keys(question)
     time.sleep(1)
-    #createButton.click()
-    #time.sleep(2)
+    createButton.click()
+    time.sleep(2)
 
 def delete_account(email, password, driver):
     profilelink = driver.find_element_by_link_text('My Profile')
@@ -110,4 +114,28 @@ def delete_account(email, password, driver):
     submitdel.click()
     time.sleep(1)
 
-#def joinRoom(roomname, roomID):
+def join_room(room_id, driver):
+    createButton = driver.find_element_by_link_text('Join Room')
+    createButton.click()
+    time.sleep(1)
+
+    topicField = driver.find_element_by_id('room_id')
+    createButton = driver.find_element_by_id('joinButton')
+
+    topicField.send_keys(room_id)
+    time.sleep(1)
+    createButton.click()
+    time.sleep(2)
+
+    agreeButton = driver.find_element_by_id("id_opinion_0")
+    agreeButton.click()
+    time.sleep(2)
+    submitButton = driver.find_element_by_id("op-submit")
+    submitButton.click()
+    time.sleep(2)
+    commentText = driver.find_element_by_name("comment")
+    commentText.send_keys("This is a test comment")
+    time.sleep(2)
+    commentButton = driver.find_element_by_name("comm")
+    commentButton.click()
+    time.sleep(3)
