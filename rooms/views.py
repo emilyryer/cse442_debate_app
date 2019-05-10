@@ -23,7 +23,7 @@ def create(request, id):
                     }
                 request.session['room-name'] = roomName
                 request.session['room-topic'] = roomTopic
-                return redirect(roomName + '/')
+                return redirect(roomTopic + '/')
             else:
               print(form.errors.as_text())
               print("nada")
@@ -52,6 +52,7 @@ def join(request):
         return render(request, 'join-room.html', {'form': form})
 
 def room(request, id, string):
+    comms = []
     if request.method == 'POST':
         form = DebateCheckForm(request.POST)
         cForm = CommentForm(request.POST)
@@ -71,6 +72,9 @@ def room(request, id, string):
             print("made it")
             opinion = request.session.get('opinion')
             comment = cForm.cleaned_data['comment']
+            comms.insert(0, comment)
+            comms.insert(0, comment)
+            print(comms)
             room_name = request.session.get('room-name')
             room_topic = request.session.get('room-topic')
             context = {
@@ -78,7 +82,8 @@ def room(request, id, string):
                 'roomName': room_name,
                 'roomTopic': room_topic,
                 'cForm': cForm,
-                'comment': comment
+                'comment': comment,
+                'comms': comms
                 }
             print("made it")
             return render(request, 'room.html', context )

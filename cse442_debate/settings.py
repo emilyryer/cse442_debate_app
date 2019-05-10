@@ -143,4 +143,5 @@ LOGOUT_REDIRECT_URL = 'home'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/accounts/static/'
+STATIC_URL = 'https://storage.googleapis.com/debate-static/static/'
+STATIC_ROOT ='/accounts/static/'

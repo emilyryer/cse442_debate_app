@@ -84,7 +84,7 @@
     }
     #disagree-comments{
       min-height: 500px;
-      text-align: center;
+      text-align: left;
       border: 0px;
       background-color: white;
       border-left: 4px solid #002f56;
@@ -166,26 +166,36 @@
 
     <div id="comment-row" class="row">
       <div id="agree-comments" class="col">
+        {% if opinion == 'Agree' %}
         {% if comment|length > 0 %}
 
         <div id="style-comment">
             {{ comment }}
         </div>
         {% endif %}
+        {% endif %}
       </div>
 
 
       <div id="disagree-comments" class="col">
+        {% if opinion == 'Disagree' %}
+        {% if comment|length > 0 %}
 
+        <div id="style-comment">
+            {{ comment }}
+        </div>
+        {% endif %}
+        {% endif %}
       </div>
-      
+
     </div>
 
   </div>
   <div id="comment-div">
     <form id="comment" action="" method="post">
-      {% csrf_token %}
-      {{ cForm.comment.label }} {{ cForm.comment }}<button style="margin-left: 10px;" class="btn btn-success" type="submit" value="Click" name="comm">Post</button>
+        {% csrf_token %}
+        {{ cForm.comment.label }} {{ cForm.comment }}  {% if opinion %}<button style="margin-left: 10px;" class="btn btn-success" type="submit" value="Click" name="comm">Post</button>
+      {% endif %}
     </form>
   </div>
 </body>
