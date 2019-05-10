@@ -4,7 +4,7 @@ import comments
 
 from google.cloud import (storage, exceptions)
 
-logging.basicConfig(filename='rooms.log', level='INFO', format='w')
+logging.basicConfig(filename='room.log', level='INFO', format='w')
 
 def create_room(room_name='default', topic='', user='unknown'):
     storage_client = storage.Client()

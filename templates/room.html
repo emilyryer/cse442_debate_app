@@ -1,47 +1,205 @@
 {% extends 'base.html' %}
 
-{% block head %}
-  <style> 
-    .topic{
-   position: absolute;
-    background-color:#005bbb;
-    color:#FFFFFF;
-  }
-
-  </style>
-
-{% endblock %}
 {% block title %}Debate Room{% endblock %}
 
-<div class="container container-room">
-	<div class="row">
-    	<div class="col-1 col-md-2"> </div>
-        	<div class="topic jumbotron jumbotron-fluid col-10 col-md-8">
-              <div class="container-fluid">
-    			<h1 style="text-align:center;" class=display-4> {{Example Debate Topic}} </h1>
-  				</div>
+{% block content %}
+<head>
+  <style>
+
+    html{
+      height: 100%;
+    }
+    body {
+      background-color:  #005bbb;
+      height: 100%;
+      margin: 0;
+      min-height: 100vh;
+    }
+    #middle{
+      display: flex;
+      background-color: white;
+      color: #002f56;
+      text-align: center;
+      font-size: 15px;
+      border-radius: 2px;
+      border: 4px solid #002f56;
+    }
+    #outside{
+      background-color: white;
+      align-items: flex-start;
+    }
+    .container-fluid{
+      padding: 30px;
+      padding-top: 5px;
+    }
+    .row{
+      height: 100px;
+      border-radius: 5px;
+    }
+    .col{
+      border-radius: 2px;
+      border: 4px solid #002f56;;
+    }
+    p{
+      margin: auto;
+      text-algin: center;
+    }
+    #left-head{
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    #invite{
+      display: flex;
+      margin-top: 4%;
+    }
+    #choice{
+      margin-top: 3%;
+    }
+    #agree{
+      background-color: #198c19;
+      color: white;
+      border: 0px;
+      height: 50px;
+      text-align: center;
+    }
+    #disagree{
+      background-color: #bf0000;
+      color: white;
+      border: 0px;
+      height: 50px;
+      text-align: center;
+    }
+    #comment-bar{
+      height: 50px;
+    }
+    #comment-row{
+      margin-top: 0px;
+      padding-top: 0px;
+    }
+    #agree-comments{
+      min-height: 500px;
+      text-align: left;
+      border: 0px;
+      background-color: white;
+    }
+    #disagree-comments{
+      min-height: 500px;
+      text-align: left;
+      border: 0px;
+      background-color: white;
+      border-left: 4px solid #002f56;
+    }
+    #comment-div{
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      background-color: #002f56;
+      padding: 5px;
+      color: white;
+      border-radius: 2px;
+      border: 4px solid #002f56;
+    }
+    #comment{
+      color: white;
+    }
+    #style-comment{
+      text-align: left;
+      padding: 15px;
+      background-color: lightgray;
+      margin-top: 10px;
+      display: inline-block;
+      border-radius: 10px;
+    }
+
+  </style>
+</head>
+
+{% if user.is_authenticated %}
+{% csrf_token %}
+
+<body>
+  <div class="container-fluid">
+
+    <div class="row">
+      <div id="outside" class="col">
+        <p id="left-head">
+          Room:  {{ roomTopic }}
+          <br>Join Code: 24456</br>
+        </p>
+        <a href="#" id="invite">
+          Invite
+          {% load static %}
+          <img style="margin-left: 3%;" src="{% static 'accounts/invite.png' %}" alt="logo">
+        </a>
+      </div>
+      <div id="middle" class="col-6">
+        <p>
+          {{ roomName }}
+        </p>
+      </div>
+      <div style="display: flex;" id="outside" class="col">
+        {% if opinion == 'Agree' %}
+          <p>Agree</p>
+        {% elif opinion == 'Disagree' %}
+          <p>Disagree</p>
+        {% else %}
+        <form id="choice" action="" method="post" onSubmit="hide_form()">
+          {% csrf_token %}
+          {% for choice in form.opinion %}
+            {{ choice }}
+          {% endfor %}
+          <br>
+          <input class=" btn btn-success" id="op-submit" type="submit" value="Submit">
+        </form>
+        {% endif %}
+      </div>
+    </div>
+
+    <div id="comment-bar" style="margin-bottom: 0px;" class="row">
+      <div id="agree" class="col">
+        <p style="margin-top: 10px;">Agree<p>
+      </div>
+      <div id="disagree" class="col">
+        <p style="margin-top: 10px;">Disagree<p>
+      </div>
+    </div>
+
+    <div id="comment-row" class="row">
+      <div id="agree-comments" class="col">
+        {% if opinion == 'Agree' %}
+        {% if comment|length > 0 %}
+
+        <div id="style-comment">
+            {{ comment }}
         </div>
-      	<div class="col-1 col-md-2"> </div>
-	</div>
-	
-	<div class="row">
-    <div class="col-sm-6">
-      <div class="well well-lg">
-        <h4>Agree</h4>
+        {% endif %}
+        {% endif %}
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="well well-lg">
-        <h4>Disagree</h4>
+
+
+      <div id="disagree-comments" class="col">
+        {% if opinion == 'Disagree' %}
+        {% if comment|length > 0 %}
+
+        <div id="style-comment">
+            {{ comment }}
+        </div>
+        {% endif %}
+        {% endif %}
       </div>
+
     </div>
+
   </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <p>agree comments</p>
-    </div>
-    <div class="col-sm-6">
-      <p>disagree comments</p>
-    </div>
+  <div id="comment-div">
+    <form id="comment" action="" method="post">
+        {% csrf_token %}
+        {{ cForm.comment.label }} {{ cForm.comment }}  {% if opinion %}<button style="margin-left: 10px;" class="btn btn-success" type="submit" value="Click" name="comm">Post</button>
+      {% endif %}
+    </form>
   </div>
-</div>
+</body>
+
+
+{% endif %}
+{% endblock %}
